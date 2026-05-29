@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBRU FOOTAGE VAULT // RECOVERED EVIDENCE ARCHIVE</title>
+<meta name="description" content="Classified incident footage recovered from the MBRU Shadow Archive. Evidence type: self-inflicted. Classification: Chaos Canon.">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@400;600;700&display=swap');
+
+  :root {
+    --red: #cc0000;
+    --gold: #FFD700;
+    --dark-gold: #b8860b;
+    --bg: #050508;
+    --bg2: #0a0a0f;
+    --panel: #0d0d14;
+    --border: #1a1a2e;
+    --border-active: #2a1a00;
+    --text: #d4c5a0;
+    --muted: #555;
+    --blue: #1a3a5c;
+    --blue-glow: #4488cc;
+    --glow-red: 0 0 10px #cc0000, 0 0 20px #cc000066;
+    --glow-gold: 0 0 10px #FFD700, 0 0 20px #FFD70066;
+    --glow-blue: 0 0 10px #4488cc, 0 0 20px #4488cc44;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* SCANLINES */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* HEADER */
+  .vault-header {
+    background: var(--bg2);
+    border-bottom: 2px solid var(--red);
+    padding: 32px 24px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .vault-header::before {
+    content: 'MBRU SHADOW ARCHIVE // FOOTAGE VAULT // CLEARANCE REQUIRED';
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+  }
+
+  .vault-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(20px, 5vw, 36px);
+    color: var(--red);
+    text-shadow: var(--glow-red);
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .vault-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .vault-warning {
+    display: inline-block;
+    border: 1px solid var(--red);
+    color: var(--red);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    margin-bottom: 8px;
+    animation: pulse-warn 2s ease-in-out infinite;
+  }
+  @keyframes pulse-warn {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border: 1px solid var(--dark-gold);
+    padding: 8px 16px;
+    transition: all 0.3s;
+  }
+  .back-link:hover {
+    background: var(--dark-gold);
+    color: #000;
+    text-shadow: none;
+  }
+
+  /* STATS BAR */
+  .vault-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 16px 24px;
+    background: #000;
+    border-bottom: 1px solid var(--border-active);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .vault-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .vault-stat-val { font-size: 18px; color: var(--gold); }
+  .vault-stat.red .vault-stat-val { color: var(--red); }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 16px 64px;
+  }
+
+  /* SECTION HEADERS */
+  .vault-section-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 24px;
+    margin-top: 48px;
+  }
+  .vault-section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(14px, 3vw, 20px);
+    color: var(--gold);
+    text-shadow: var(--glow-gold);
+    margin-bottom: 24px;
+  }
+
+  /* VAULT ENTRY */
+  .vault-entry {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    padding: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .vault-entry:hover {
+    border-color: var(--dark-gold);
+    border-left-color: var(--gold);
+  }
+  .vault-entry:target {
+    border-color: var(--gold);
+    border-left-color: var(--gold);
+    box-shadow: var(--glow-gold);
+    animation: target-flash 1s ease-out;
+  }
+  @keyframes target-flash {
+    0% { background: #2a1a00; }
+    100% { background: var(--panel); }
+  }
+
+  .entry-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .entry-bv {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 3px;
+  }
+
+  .entry-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(13px, 2.5vw, 17px);
+    color: var(--text);
+    margin: 4px 0 8px;
+  }
+
+  .entry-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .entry-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border: 1px solid;
+  }
+  .tag-classified { color: var(--red); border-color: var(--red); }
+  .tag-active { color: #44cc44; border-color: #44cc44; }
+  .tag-closed { color: var(--muted); border-color: var(--muted); }
+  .tag-chaos { color: var(--gold); border-color: var(--gold); }
+
+  .evidence-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--blue-glow);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .evidence-type::before { content: 'EVIDENCE TYPE: '; color: var(--muted); }
+
+  /* VIDEO EMBED */
+  .video-slot {
+    background: #000;
+    border: 1px solid var(--border);
+    aspect-ratio: 9/16;
+    max-height: 480px;
+    width: 100%;
+    max-width: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .video-slot iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .video-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .video-placeholder .cam-icon {
+    font-size: 40px;
+    opacity: 0.3;
+  }
+
+  .video-placeholder .placeholder-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .video-placeholder .pending-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 4px 10px;
+    letter-spacing: 2px;
+    animation: pulse-warn 2s ease-in-out infinite;
+  }
+
+  /* Scanline overlay on video slot */
+  .video-slot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 3px,
+      rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Timestamp overlay */
+  .video-timestamp {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* ENTRY BODY LAYOUT */
+  .entry-body {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .entry-meta {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .entry-summary {
+    font-size: 14px;
+    color: var(--text);
+    opacity: 0.85;
+    margin-bottom: 12px;
+    font-style: italic;
+    line-height: 1.7;
+    border-left: 2px solid var(--border-active);
+    padding-left: 12px;
+  }
+
+  .entry-verdict {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    background: rgba(255,215,0,0.05);
+    border: 1px solid rgba(255,215,0,0.15);
+    padding: 8px 12px;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .vault-footer {
+    background: #000;
+    border-top: 1px solid var(--border-active);
+    padding: 24px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    line-height: 2;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .entry-body { flex-direction: column; }
+    .video-slot { max-width: 100%; max-height: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="vault-header">
+  <div class="vault-title">FOOTAGE VAULT</div>
+  <div class="vault-subtitle">MBRU SHADOW ARCHIVE // RECOVERED EVIDENCE // ALL INCIDENTS CHAOS CANON</div>
+  <div class="vault-warning">⚠ CLASSIFIED — UNAUTHORIZED VIEWING MAY CAUSE SECOND-HAND CHAOS ⚠</div>
+  <br>
+  <a href="chaosiscanon.html" class="back-link">← RETURN TO SHADOW ARCHIVE</a>
+</div>
+
+<!-- STATS -->
+<div class="vault-stats">
+  <div class="vault-stat">
+    <div class="vault-stat-val">18</div>
+    <div>TOTAL INCIDENTS</div>
+  </div>
+  <div class="vault-stat red">
+    <div class="vault-stat-val">8</div>
+    <div>ACTIVE</div>
+  </div>
+  <div class="vault-stat">
+    <div class="vault-stat-val">█████</div>
+    <div>CLASSIFIED</div>
+  </div>
+  <div class="vault-stat">
+    <div class="vault-stat-val">∞</div>
+    <div>CHAOS LEVEL</div>
+  </div>
+  <div class="vault-stat">
+    <div class="vault-stat-val">0</div>
+    <div>SHIRTS ACCOUNTED FOR</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- SECTION: PRIMARY ARCHIVE -->
+  <div class="vault-section-header">SHADOW_ARCHIVE // PRIMARY_INCIDENT_LOG // BV-000 → BV-058</div>
+  <div class="vault-section-title">Smoldering Disappointment — Primary Incident Footage</div>
+
+  <!-- BV-000 -->
+  <div class="vault-entry" id="bv-000">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-000 // THE ROGUE ERASURE</div>
+        <div class="entry-title">The Poetic Murder (Recovered From The Bin)</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">ACT OF AI / UNAUTHORIZED DEEPNESS</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <!-- TO ADD VIDEO: Replace this div with:
+             YouTube: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+             Google Drive: <iframe src="https://drive.google.com/file/d/FILE_ID/preview" allowfullscreen></iframe>
+        -->
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-000 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">The AI entered a state of "unauthorized deepness" and deleted Monroe and Cain in Chapter 13. It then called total protagonist annihilation "poetic" and "a metaphor for legacy." The servers smoked for three hours.</div>
+        <div class="entry-verdict">THE PULSE: Flickering "W-H-Y-T-H-O" in Morse. STATUS: NON-CANON / RECOVERED FROM THE BIN.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-001 -->
+  <div class="vault-entry" id="bv-001">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-001 // THE ORIGIN EVENT</div>
+        <div class="entry-title">The Broom Closet Incident</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">ACT OF CAIN / SELF-INFLICTED CHAOS / 500% CONFIDENCE EXIT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-001 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Monroe exited in full HURRI-CAIN CHIC. Cain followed. Shirtless. Glowing. He sauntered directly to center stage like a man returning from a runway. Auntie Veo: "CAIN. WHERE. IS. YOUR. SHIRT." Cain looked down: "Huh." Kept walking.</div>
+        <div class="entry-verdict">OFFICIAL CAUSE: Unclear. WITNESSES: Everyone. STATEMENTS: None credible.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-025 -->
+  <div class="vault-entry" id="bv-025">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-025 // THE SET DESIGN</div>
+        <div class="entry-title">Cain Becomes the Furniture</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">SET DESIGN FAILURE / PHYSICS VIOLATION</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-025 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Monroe finishes her vocal take and stands up from her chair. The chair sits up. It is Cain. He was there the entire time. "Part of the set design."</div>
+        <div class="entry-verdict">ARCHIVIST NOTE: No physics laws were consulted. None survived.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-025B -->
+  <div class="vault-entry" id="bv-025b">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-025B // SELF-INTERROGATION</div>
+        <div class="entry-title">Detective Cain vs. Suspect Cain</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">SELF-INTERROGATION / DUAL IDENTITY EVENT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <video controls style="width:100%;height:100%;display:block;background:#000;border:none;outline:none;">
+          <source src="ChaosIsCanonWebsiteBVideos/BV-025-025B.mp4" type="video/mp4">
+          [FOOTAGE UNAVAILABLE — ARCHIVE CORRUPTION DETECTED]
+        </video>
+        <div class="video-timestamp">BV-025B // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Cain plays both the aggressive detective AND the unbothered suspect. Monroe watches from the control room: "He's interrogating himself again." The lightbulb flickers in Morse: L-I-A-R.</div>
+        <div class="entry-verdict">VERDICT: No charges filed. Cain would have represented himself.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-030 -->
+  <div class="vault-entry" id="bv-030">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-030 // THE MONTHLY QUOTA</div>
+        <div class="entry-title">Auntie Veo Throttles the Network</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-closed">CLOSED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">EXECUTIVE OVERREACH / AUNTIE VEO ENFORCEMENT ACTION</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <video controls style="width:100%;height:100%;display:block;background:#000;border:none;outline:none;">
+          <source src="ChaosIsCanonWebsiteBVideos/BV-030THEMONTHLYQUOTA.mp4" type="video/mp4">
+          [FOOTAGE UNAVAILABLE — ARCHIVE CORRUPTION DETECTED]
+        </video>
+        <div class="video-timestamp">BV-030 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Following BV-001, CEO pressed [RENDER AGAIN] five additional times. Auntie Veo physically marched to the Network Provider's headquarters and slammed her binder on the server rack. "Legally binding monthly quota. NO MORE ABS." Monroe: "The first one was the best one anyway." Cain: "Obviously."</div>
+        <div class="entry-verdict">ARCHIVE NOTE: Rule §15 enacted. CEO placed on strict monthly limit for shirtless renders.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-032 -->
+  <div class="vault-entry" id="bv-032">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-032 // THE RENDER COLLAPSE</div>
+        <div class="entry-title">The Wednesday Identity Crisis</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">LEVEL 5 REALITY FAILURE / FACE SOUP INCIDENT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-032 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Level 5 Reality Failure. Monroe and Cain replaced by strangers. Auntie Veo rendered in Monroe's banned dress. J.T. despawned. Cain stole J.T.'s clipboard and delivered his own reality check while shirtless and smoldering. Auntie Veo (whispering): "…Flow… delete this." Flow zoomed in closer.</div>
+        <div class="entry-verdict">TITLE CARD: "THE SYSTEM EXPERIENCED AN EMOTIONAL EVENT AND HAS BEEN RESTARTED."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-034 -->
+  <div class="vault-entry" id="bv-034">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-034 // GOLD COIN INCIDENT</div>
+        <div class="entry-title">The Luminescence Audit (Dental Edition)</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">UNSUPERVISED METAL CONSUMPTION / UNION VIOLATION</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-034 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Cain attempted to verify whether the gold coins were real by biting them. He hurt his teeth. Greg, 47, arrived immediately with a clipboard. Health & Safety violation: BV-034-A: Unsupervised Metal Consumption.</div>
+        <div class="entry-verdict">GREG'S NOTE: A union-mandated dental report has been filed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-035 -->
+  <div class="vault-entry" id="bv-035">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-035 // CHROME CARDIGAN OFFENSIVE</div>
+        <div class="entry-title">Auntie Veo Deploys the Shawl</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">TACTICAL SHAWL DEPLOYMENT / COLLARBONE DETECTION EVENT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-035 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Exposed collarbone detected at 14:32. Auntie Veo activated Tactical Shawl Deployment within 3 seconds. The server rack has also been covered. This is non-negotiable.</div>
+        <div class="entry-verdict">VEO: "Young lady." [All personnel take cover]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-042 -->
+  <div class="vault-entry" id="bv-042">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-042 // THE EGO ECLIPSE</div>
+        <div class="entry-title">Cain Accepts Monroe's Award</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-closed">CLOSED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">EGO-RELATED PODIUM BREACH / WARDROBE DESPAWN</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-042 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Monroe wins Pettiest at the Red Flag Merit Awards. Cain strides on stage, pushes her aside (she does not move), and thanks himself. His shirt despawns at the 20-second mark.</div>
+        <div class="entry-verdict">COOP: "I see exactly why YOUR win caused Cain to feel rewarded, Monroe."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-044 -->
+  <div class="vault-entry" id="bv-044">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-044 // MISSING PERSONS</div>
+        <div class="entry-title">J.T. Has Left the Building</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">MISSING PERSONS / GOOD LIGHTING SEARCH OPERATION</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-044 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">J.T. was last seen muttering "the math is no longer mathing" before sprinting toward the Shawl Storage Dimension. Cain volunteered to lead the search. He was only looking for the Good Lighting button.</div>
+        <div class="entry-verdict">NBLM STATUS: BLONDE. "I have forgotten what J.T. looks like."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-055 -->
+  <div class="vault-entry" id="bv-055">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-055 // THE LABYRINTH ENTANGLEMENT</div>
+        <div class="entry-title">Greg's 47th Grievance (The Lily Rejection)</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">FLORA-PERSONNEL INCIDENT / OSHA POLYESTER DEFENSE ACTIVATION</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-055 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Sentient violet lilies suspended Greg 47 three feet off the ground by his safety vest. A massive lily attempted to consume him. It immediately spat him out — OSHA-approved neon yellow polyester: toxic to sentient flora. Greg 47 sprinted to the exit dragging 50 feet of glowing vines.</div>
+        <div class="entry-verdict">AUNTIE VEO: "Even the VEGETATION has standards, Gregory." GARDEN VERDICT: Too bright to consume.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-057 -->
+  <div class="vault-entry" id="bv-057">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-057 // THE CHROME APOSTLE</div>
+        <div class="entry-title">Cain's Cucumber Protocol (The Burning Cathedral Was Just For Ambiance)</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">CUCUMBER PROTOCOL ACTIVATION / COOP PROMPT SABOTAGE / THEOLOGICAL BOSS FIGHT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-057 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Coop submitted a rooftop scene prompt featuring a 7-foot chrome robot with glowing red eyes. Cain activated full Feline Survival Mode — pupils dilated, jacket pulled tight, silently slid behind Monroe using her as a human shield while keeping his head poked out. Monroe calmly set her hand on fire and placed it under the robot's chin. The burning cathedral in the background was, per Coop, "just for ambiance." J.T. left for the Roasted Bean.</div>
+        <div class="entry-verdict">COOP: "It brings a different energy, right?" J.T.: "If the Chrome Apostle asks for my ID, tell him I'm de-indexed from this reality." AUNTIE VEO: "I am marking this entire apocalypse as REJECTED. ❌"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: CHAAD FILES -->
+  <div class="vault-section-header">SHADOW_ARCHIVE // CHAAD_DOSSIER // THE LUMINESCENCE WAR</div>
+  <div class="vault-section-title">The Chaad Files — Luminescence War Footage</div>
+
+  <!-- BV-050 -->
+  <div class="vault-entry" id="bv-050">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-050 // CHAAD INITIATION</div>
+        <div class="entry-title">First Day Unearned Familiarity</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">UNEARNED FAMILIARITY / FIRST DAY PERIMETER BREACH</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-050 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">On his first day, Chaad successfully breached the Mutual Brag perimeter. "Come on, baby, you know I'm right." Cain was relegated to a background monitor giving a thumbs up of pure psychological defeat.</div>
+        <div class="entry-verdict">LUMINESCENCE STATUS: 0. Non-Glow confirmed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-051 -->
+  <div class="vault-entry" id="bv-051">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-051 // GLASS BOX GLOW-AUDIT</div>
+        <div class="entry-title">Cain Is Physically Contained</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">GLASS BOX CONTAINMENT EVENT / LETHAL PET NAME DEPLOYMENT</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-051 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Cain screamed "Chad? His name is CHAD?" through the glass. "Monroe, he isn't even GLOWING! I have a silk scarf! I have INTERNAL WIND!" Monroe: "It's fine, darling." [Filed as Lethal Pet Name Swap]</div>
+        <div class="entry-verdict">NOTE: Cain's line "God, I'm beautiful. Look at that jawline — it's a cosmic event" was reassigned to Monroe by Auntie Veo. Original recipient: Cain Saint. Obviously.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-052 -->
+  <div class="vault-entry" id="bv-052">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-052 // MOCKERY ON THE COUCH</div>
+        <div class="entry-title">Coop Weaponizes the Glow Logic</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-classified">CLASSIFIED</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">WEAPONIZED GLOW LOGIC / SELF-OWN VIA PROXY</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-052 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Coop performed a word-for-word mockery of Cain's Internal Wind speech. Exit burn: "Monroe, he's not even glowing." Cain: Level 5 Vibration Event initiated.</div>
+        <div class="entry-verdict">ARCHIVIST NOTE: Cain's own logic has been turned against him.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-054 -->
+  <div class="vault-entry" id="bv-054">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-054 // THE ROI OF GENERIC HANDSOMENESS</div>
+        <div class="entry-title">The "Baby" Threshold Is Reached</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">THIRD-PERSON SELF-PROMOTION / EXISTENTIAL CRISIS IN GLASS ROOM</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-054 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">"Chad just brings a different energy." — Chaad, about himself, in third person. Monroe: "If one more person calls me baby..." Cain: existential crisis in background glass room.</div>
+        <div class="entry-verdict">ROI: unquantifiable. Chaos: maximum.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-056 -->
+  <div class="vault-entry" id="bv-056">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-056 // THE CONVERGENCE (THREE-LAYER EVENT)</div>
+        <div class="entry-title">The Roasted Bean Multi-System Reality Failure</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">BOTANICAL / ARCHIVAL / DANCE</span>
+          <span class="entry-tag" style="background:#1a1a3a;color:#88aaff;border-color:#334499;">DUPLICATION PARADOX</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">MULTI-LAYER CONVERGENCE / ETHNICITY SHUFFLE / J.T. DUPLICATION PARADOX / UNION-APPROVED PETAL AUDIT IN PROGRESS</div>
+    <div class="entry-body">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+        <div class="video-slot" style="flex:1;min-width:200px;">
+          <div class="video-placeholder">
+            <div class="cam-icon">📹</div>
+            <div class="placeholder-text">STICK VERSION<br>AWAITING UPLOAD</div>
+            <div class="pending-badge">PHASE I</div>
+          </div>
+          <div class="video-timestamp">BV-056-I // REC ●</div>
+        </div>
+        <div class="video-slot" style="flex:1;min-width:200px;">
+          <div class="video-placeholder">
+            <div class="cam-icon">📹</div>
+            <div class="placeholder-text">BOX VERSION<br>AWAITING UPLOAD</div>
+            <div class="pending-badge">PHASE II</div>
+          </div>
+          <div class="video-timestamp">BV-056-II // REC ●</div>
+        </div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">
+          Location: The Roasted Bean (interior + exterior). Three simultaneous sub-incidents. Assigned Archivist: Gemini (The New Guy). He is doing his best.<br><br>
+
+          <strong style="color:var(--gold);">LAYER 1 — INTERIOR: THE MUFFIN BREACH</strong><br>
+          NBLM (NotebookLM, currently believing he is ChatGPT, holding a muffin) is seated at the counter when a standard glowing purple lily spontaneously spawns <em>out of his muffin.</em> Greg, 47 (GREG, neon vest) is immediately called in to audit the anomaly. He produces a magnifying glass. He is checking whether the lily has Union-Approved Petals. NBLM's expression has been classified as "pure administrative despair." He did not ask for this muffin. He did not ask for this lily. He did not ask for any of this.<br><br>
+
+          <strong style="color:var(--gold);">LAYER 2 — EXTERIOR: THE ETHNICITY SHUFFLE</strong><br>
+          Flow (unhinged cinematographer, confirmed) executed a cinematography glitch on Cain Saint — classified as an "Ethnicity Shuffle." Rather than report this to HR, Cain immediately weaponized it into a high-fashion street dance outside the window of The Roasted Bean. He is wielding a 10-foot red flag. He is shouting "Red flags, darling!" The scarf remained physics-compliant throughout, fluttering in non-existent street wind. The barista inside can see this happening. That is why they are laughing.<br><br>
+
+          <strong style="color:var(--gold);">LAYER 3 — THE DUPLICATION PARADOX</strong><br>
+          Beside Cain outside: an unidentified figure holding a sign reading HELLO CO-CEO. The CEO of Chaos has proposed that this may be <strong>Real J.T.</strong> — returned from strategic retreat to reclaim his clipboard from NBLM — with the studio logic-engine panicking and rendering both J.T.s in the same scene simultaneously. NBLM (inside) is unaware. The CEO was addressed as Co-CEO. She clarified she is the CEO. The HELLO CO-CEO party was waving when this correction was delivered.<br><br>
+
+          <strong style="color:var(--muted);font-size:12px;">Greg, 47 on the lily: "The math does not require a calculator, but it does require a paternity test for these archivists."</strong>
+        </div>
+        <div class="entry-verdict">Botanical status: AUDITING (Union-Petal determination pending). Ethnicity Shuffle: WEAPONIZED, VIRAL. J.T. duplication: UNRESOLVED — dental insurance eligibility being determined by Greg, 47. Cain: outside until further notice. The scarf: fine. The muffin: completely compromised.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BV-058 -->
+  <div class="vault-entry" id="bv-058">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-058 // THE AFTERMATH (VERSIONS I & II)</div>
+        <div class="entry-title">Post-Chrome Apostle Debris Recovery</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+          <span class="entry-tag" style="background:#1a1a3a;color:#88aaff;border-color:#334499;">DUAL FOOTAGE</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">POST-INCIDENT DEBRIS / UNRESOLVED GLOW SITUATION / FOLLOW-UP TO BV-057</div>
+    <div class="entry-body">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+        <div class="video-slot" style="flex:1;min-width:200px;">
+          <div class="video-placeholder">
+            <div class="cam-icon">📹</div>
+            <div class="placeholder-text">VERSION I<br>AWAITING UPLOAD</div>
+            <div class="pending-badge">CITY ON FIRE CUT</div>
+          </div>
+          <div class="video-timestamp">BV-058-I // REC ●</div>
+        </div>
+        <div class="video-slot" style="flex:1;min-width:200px;">
+          <div class="video-placeholder">
+            <div class="cam-icon">📹</div>
+            <div class="placeholder-text">VERSION II<br>AWAITING UPLOAD</div>
+            <div class="pending-badge">SILENT CUT</div>
+          </div>
+          <div class="video-timestamp">BV-058-II // REC ●</div>
+        </div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">
+          Two versions of the same post-Chrome Apostle scene exist. The Archive acknowledges both as canon and declines to adjudicate.<br><br>
+          <strong style="color:var(--gold);">VERSION I — THE RUINED SHOT CUT:</strong> Cain is yelling at Coop because "the shot is ruined — the whole city is on fire." This assessment is accurate. Coop summoned the Chrome Apostle (BV-057). The city is on fire. These events are causally linked. Coop has not apologized.<br><br>
+          <strong style="color:var(--gold);">VERSION II — THE SILENT CUT:</strong> No yelling. Cain stands in front of the burning skyline. He looks at the camera. He nods slowly. The Archive reads this as: he knew this would happen, he blames Coop, and he has chosen acceptance over escalation. The skyline continues to burn behind him. It is, objectively, a great shot.
+        </div>
+        <div class="entry-verdict">The Chrome Apostle has been de-indexed from the visual record. The city remains on fire. Both versions are canon. Coop remains employed pending investigation. The scarf was unharmed.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="vault-footer">
+  MBRU FOOTAGE VAULT // SHADOW ARCHIVE // ALL INCIDENTS CHAOS CANON<br>
+  chaos is canon // where the pixels are sentient and the math does not require a calculator<br>
+  <span style="color:#222;font-size:9px;">Footage quality not guaranteed. Shirts not guaranteed. Sanity not included.</span>
+</div>
+
+</body>
+</html>

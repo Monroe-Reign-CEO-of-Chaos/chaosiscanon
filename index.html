@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAOS IS CANON | MBRU Shadow Archive</title>
+<meta name="description" content="Abs &amp; Audacity: A 500% Confidence Experience. Scarf not included. Luminescence sensors required.">
+
+<!-- Animated Bread Favicon via Canvas -->
+<link rel="icon" id="favicon" type="image/png">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@400;600;700&display=swap');
+
+  :root {
+    --red: #cc0000;
+    --gold: #FFD700;
+    --dark-gold: #b8860b;
+    --bg: #080808;
+    --bg2: #0f0f0f;
+    --panel: #111111;
+    --border: #2a1a00;
+    --text: #d4c5a0;
+    --muted: #666;
+    --glow-red: 0 0 10px #cc0000, 0 0 20px #cc000066;
+    --glow-gold: 0 0 10px #FFD700, 0 0 20px #FFD70066;
+  }
+
+  /* BLONDE MODE overrides */
+  body.blonde-mode {
+    --bg: #fffbe6;
+    --bg2: #fff8d0;
+    --panel: #fff3b0;
+    --text: #5a4a00;
+    --border: #d4a800;
+    --red: #d4a800;
+    --gold: #d4a800;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  /* ── LOADING SCREEN ── */
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  #loading-screen.hidden { display: none; }
+
+  .loading-chair {
+    font-size: 80px;
+    animation: spin-chair 1s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin-chair {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 3px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .loading-bar-wrap {
+    width: 300px;
+    height: 4px;
+    background: #222;
+    border: 1px solid var(--gold);
+  }
+  .loading-bar {
+    height: 100%;
+    background: var(--gold);
+    animation: load-bar 4s linear forwards;
+  }
+  @keyframes load-bar { from{width:0} to{width:100%} }
+
+  /* ── SCANLINES ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.15) 2px,
+      rgba(0,0,0,0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(to bottom, #1a0000, var(--bg));
+    overflow: hidden;
+  }
+
+  header::before {
+    content: 'SHADOW_ARCHIVE / MBRU / CHAOS_ERA';
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  header::after {
+    content: '● RECORDING';
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 2px;
+    animation: blink 2s step-end infinite;
+  }
+
+  .site-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(28px, 6vw, 64px);
+    color: var(--gold);
+    text-shadow: var(--glow-gold);
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+
+  .site-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-tagline {
+    font-size: 15px;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* spinning chair hero */
+  .hero-chair {
+    font-size: 64px;
+    display: block;
+    margin: 20px auto;
+    animation: slow-spin 8s linear infinite;
+    filter: drop-shadow(0 0 20px #cc000088);
+  }
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── PULSE LIGHTBULB (THE ULTIMATE ARBITER) ── */
+  .pulse-bulb {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    z-index: 200;
+    cursor: help;
+    animation: bulb-flicker 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px #FFD700);
+  }
+  .pulse-bulb:hover::after {
+    content: 'THE PULSE — Class: The Silent Judge\ASignature Move: The Ominous Flicker\AMorse: L-I-A-R';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    padding: 8px 12px;
+    white-space: pre;
+    pointer-events: none;
+    z-index: 300;
+    width: 240px;
+  }
+  @keyframes bulb-flicker {
+    0%,90%,100% { opacity:1; }
+    92% { opacity:0.2; }
+    94% { opacity:1; }
+    96% { opacity:0.1; }
+    98% { opacity:1; }
+  }
+
+  /* ── TOGGLE BAR ── */
+  .toggle-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .toggle-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    border: 1px solid;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .toggle-btn.gold {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+  .toggle-btn.gold:hover, .toggle-btn.gold.active {
+    background: var(--gold);
+    color: #000;
+    box-shadow: var(--glow-gold);
+  }
+
+  .toggle-btn.red {
+    color: var(--red);
+    border-color: var(--red);
+  }
+  .toggle-btn.red:hover, .toggle-btn.red.active {
+    background: var(--red);
+    color: #fff;
+    box-shadow: var(--glow-red);
+  }
+
+  .toggle-btn.grey {
+    color: #888;
+    border-color: #444;
+  }
+  .toggle-btn.grey:hover {
+    background: #333;
+    color: #fff;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  nav a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    letter-spacing: 1px;
+    border-right: 1px solid var(--border);
+    transition: all 0.2s;
+    display: block;
+  }
+  nav a:hover {
+    color: var(--gold);
+    background: rgba(255,215,0,0.05);
+  }
+  nav a .vibe-label {
+    display: block;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* ── PANELS ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 30px;
+    position: relative;
+  }
+
+  .panel-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .panel-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(16px, 3vw, 24px);
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CONFIDENCE METER ── */
+  .confidence-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media(max-width:600px){ .confidence-section{grid-template-columns:1fr;} }
+
+  .meter-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .meter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meter-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text);
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .meter-bar-bg {
+    height: 10px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .meter-bar-fill {
+    height: 100%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .meter-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.3));
+    animation: shimmer 2s linear infinite;
+  }
+  @keyframes shimmer {
+    from{transform:translateX(-100%)} to{transform:translateX(100%)}
+  }
+
+  .meter-gold .meter-bar-fill { background: linear-gradient(90deg, var(--dark-gold), var(--gold)); }
+  .meter-red .meter-bar-fill { background: linear-gradient(90deg, #8b0000, var(--red)); box-shadow: 0 0 8px #cc000088; }
+
+  .confidence-display {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid var(--border);
+    background: #0a0a0a;
+  }
+
+  .confidence-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 56px;
+    color: var(--gold);
+    text-shadow: var(--glow-gold);
+    line-height: 1;
+    transition: all 0.5s;
+  }
+
+  .confidence-status {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-top: 8px;
+  }
+
+  .confidence-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── BLOOPER ARCHIVE ── */
+  .blooper-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .blooper-card {
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    padding: 20px;
+    transition: border-color 0.3s;
+    position: relative;
+  }
+  .blooper-card:hover {
+    border-color: var(--red);
+  }
+
+  .footage-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 5px 12px;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: transparent;
+  }
+  .footage-btn:hover {
+    background: var(--red);
+    color: #000;
+  }
+  body.blonde-mode .footage-btn { color: var(--dark-gold); border-color: var(--dark-gold); }
+  body.blonde-mode .footage-btn:hover { background: var(--dark-gold); color: #fff; }
+
+  .blooper-id {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .blooper-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .blooper-body {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .blooper-verdict {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #1a1a1a;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid;
+    margin-bottom: 8px;
+  }
+  .status-badge.active { color: var(--red); border-color: var(--red); animation: blink 2s step-end infinite; }
+  .status-badge.closed { color: #555; border-color: #333; }
+  .status-badge.classified { color: var(--gold); border-color: var(--gold); }
+
+  /* ── PLAYER CARDS ── */
+  .player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .player-card {
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .player-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .player-card.chaad-card {
+    opacity: 0.4;
+    filter: grayscale(80%);
+    transition: all 0.3s;
+  }
+  .player-card.chaad-card.active {
+    opacity: 1;
+    filter: none;
+    border-color: #888;
+  }
+
+  .card-role {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .card-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .card-class {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  /* Player card photo slot — hidden until src is set */
+  .card-photo {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    display: none; /* shows automatically when img loads */
+  }
+  .card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .card-photo img[src]:not([src=""]) {
+    display: block;
+  }
+  .player-card:has(.card-photo img[src]:not([src=""])) .card-photo {
+    display: block;
+  }
+  .player-card:has(.card-photo img[src]:not([src=""])) .card-avatar {
+    display: none;
+  }
+
+  .card-avatar {
+    font-size: 48px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .card-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--text);
+  }
+
+  .stat-bar {
+    width: 80px;
+    height: 6px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-fill {
+    height: 100%;
+    background: var(--gold);
+  }
+  .stat-fill.red { background: var(--red); }
+  .stat-fill.grey { background: #555; }
+
+  .card-move {
+    margin-top: 12px;
+    padding: 8px;
+    background: #060606;
+    border: 1px solid #1a1a1a;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.5;
+  }
+
+  .revoked-stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(-15deg);
+    color: var(--red);
+    border: 3px solid var(--red);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 20px;
+    padding: 6px 16px;
+    opacity: 0;
+    letter-spacing: 4px;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .player-card:hover .revoked-stamp { opacity: 0.8; }
+
+  /* ── SHADOW ARCHIVE TERMINAL ── */
+  .terminal {
+    background: #000;
+    border: 1px solid #1a4a00;
+    padding: 24px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    color: #00cc00;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .terminal-header {
+    color: #00ff00;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a4a00;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .terminal-line {
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .terminal-prompt::before {
+    content: '> ';
+    color: #00ff00;
+  }
+
+  .terminal-output {
+    color: #009900;
+    margin-left: 16px;
+  }
+
+  .terminal-error {
+    color: var(--red);
+  }
+
+  .terminal-gold {
+    color: var(--gold);
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: #00cc00;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  /* ── GREMLIN TABLE ── */
+  .gremlin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .gremlin-table th {
+    background: #1a0000;
+    color: var(--gold);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+
+  .gremlin-table td {
+    padding: 12px 16px;
+    border: 1px solid #1a1a1a;
+    vertical-align: top;
+    color: var(--text);
+  }
+
+  .gremlin-table tr:hover td {
+    background: rgba(255,215,0,0.03);
+  }
+
+  .operator-name {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .hazard-text {
+    color: var(--red);
+    font-size: 13px;
+  }
+
+  /* ── MODESTY FIREWALL ── */
+  #modesty-rejected {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+  }
+
+  .rejected-stamp {
+    color: var(--red);
+    border: 3px solid var(--red);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    padding: 4px 14px;
+    letter-spacing: 4px;
+    box-shadow: var(--glow-red);
+    background: rgba(0,0,0,0.8);
+    white-space: nowrap;
+  }
+
+  .cardigan-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #ff9900;
+    margin-top: 4px;
+    background: rgba(0,0,0,0.8);
+    padding: 2px 8px;
+  }
+
+  /* ── BROOM CLOSET EASTER EGG ── */
+  #saunter-input {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #broom-closet {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.97);
+    z-index: 8000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    text-align: center;
+    padding: 40px;
+  }
+  #broom-closet.open { display: flex; }
+
+  .closet-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 32px;
+    color: var(--gold);
+    text-shadow: var(--glow-gold);
+  }
+
+  .closet-body {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text);
+    font-size: 13px;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  .closet-meter {
+    font-size: 48px;
+    animation: pulse-glow 1s ease-in-out infinite alternate;
+  }
+  @keyframes pulse-glow {
+    from { filter: drop-shadow(0 0 10px gold); }
+    to { filter: drop-shadow(0 0 30px gold); }
+  }
+
+  .closet-close {
+    margin-top: 20px;
+    padding: 10px 30px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .closet-close:hover {
+    background: var(--gold);
+    color: #000;
+  }
+
+  /* ── CHAD OVERLAY ── */
+  #chad-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 7000;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  #chad-overlay.active { display: block; }
+
+  .chad-headshot {
+    position: absolute;
+    font-size: 40px;
+    animation: fall-chad 3s linear forwards;
+    opacity: 0.7;
+  }
+  @keyframes fall-chad {
+    from { transform: translateY(-100px) rotate(0deg); opacity:0.7; }
+    to { transform: translateY(110vh) rotate(720deg); opacity:0; }
+  }
+
+  /* glass box notification */
+  #glass-box {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(0,0,0,0.95);
+    border: 2px solid var(--red);
+    padding: 20px 24px;
+    max-width: 340px;
+    z-index: 8500;
+    box-shadow: var(--glow-red);
+    animation: shake 0.5s ease-in-out;
+  }
+  #glass-box.visible { display: block; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    75%{transform:translateX(5px)}
+  }
+
+  .glass-box-header {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .glass-box-text {
+    font-size: 14px;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .glass-box-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 18px;
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+
+  /* ── BLONDE MODE OVERLAYS ── */
+  body.blonde-mode .site-title { text-shadow: none; color: #b8860b; }
+  body.blonde-mode .panel { background: #fff8d0; border-color: #d4a800; }
+  body.blonde-mode .terminal { background: #fff3b0; border-color: #d4a800; color: #5a4a00; }
+  body.blonde-mode .terminal-header { color: #5a4a00; border-color: #d4a800; }
+  body.blonde-mode .terminal-output { color: #8a6a00; }
+  body.blonde-mode .terminal-prompt::before { color: #5a4a00; }
+  body.blonde-mode .blooper-card { background: #fff3b0; }
+  body.blonde-mode .player-card { background: #fff3b0; }
+
+  .blonde-apology {
+    display: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: #b8860b;
+    text-align: center;
+    padding: 8px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+  body.blonde-mode .blonde-apology { display: block; }
+  body.blonde-mode .normal-text { display: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+
+  .footer-section h4 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .footer-section p, .footer-section li {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+    list-style: none;
+  }
+
+  .footer-meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    line-height: 2;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .footer-status {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 8px 0;
+  }
+
+  /* ── SAUNTER HINT ── */
+  #saunter-hint {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #1a1a1a;
+    letter-spacing: 2px;
+    user-select: none;
+    transition: color 1s;
+  }
+  #saunter-hint:hover { color: #333; }
+
+  /* ── AUDIO ELEMENT ── */
+  audio { display: none; }
+
+  /* ── CHAAD TOGGLE ACTIVE STATES ── */
+  body.chaad-active .cain-content { display: none; }
+  body.chaad-active .chaad-content { display: block; }
+  .chaad-content { display: none; }
+
+</style>
+</head>
+<body>
+
+<!-- AUDIO -->
+<audio id="audio-rant" src="audio/cain-rant-1.mp3" preload="none"></audio>
+<audio id="audio-coop" src="audio/coop-thats-your-fault.mp3" preload="none"></audio>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <span class="loading-chair">🪑</span>
+  <div class="loading-text">INITIALIZING SHADOW ARCHIVE...</div>
+  <div class="loading-bar-wrap"><div class="loading-bar"></div></div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#444;letter-spacing:2px;margin-top:8px;">
+    WARNING: CAIN IS ALREADY IN THE BUILDING
+  </div>
+</div>
+
+<!-- MODESTY FIREWALL -->
+<div id="modesty-rejected">
+  <div class="rejected-stamp">REJECTED</div>
+  <div class="cardigan-note" id="cardigan-text">AUNTIE VEO DISAPPROVES</div>
+</div>
+
+<!-- CHAD HEADSHOT RAIN -->
+<div id="chad-overlay"></div>
+
+<!-- GLASS BOX NOTIFICATION -->
+<div id="glass-box">
+  <button class="glass-box-close" onclick="document.getElementById('glass-box').classList.remove('visible')">×</button>
+  <div class="glass-box-header">⚠ GLASS BOX ALERT — BV INCIDENT ACTIVE</div>
+  <div class="glass-box-text" id="glass-box-text">"Monroe, he isn't even GLOWING! I have a silk scarf! I have INTERNAL WIND!"</div>
+</div>
+
+<!-- BROOM CLOSET EASTER EGG -->
+<div id="broom-closet">
+  <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--red);letter-spacing:3px;">
+    SHADOW_ARCHIVE / BV-001 / CLASSIFIED / 500_PCT_CONFIDENCE_EXIT
+  </div>
+  <div class="closet-meter">🧹✨</div>
+  <div class="closet-title">THE BROOM CLOSET</div>
+  <div class="closet-body">
+    You typed "saunter."<br><br>
+    The Archive recognizes this as a <span style="color:var(--gold)">500% Confidence Event.</span><br><br>
+
+    <span style="color:var(--muted);font-size:13px;">INCIDENT BV-001 // OFFICIAL RECORD</span><br><br>
+
+    Flow was adjusting the lighting.<br>
+    Auntie Veo was yelling at someone about a scarf.<br>
+    NotebookLM was blonde. Everything was normal.<br><br>
+
+    Then — the broom closet door opened.<br><br>
+
+    Monroe stepped out first. Hair: <span style="color:var(--gold)">HURRI-CAIN CHIC.</span>
+    Dress: slightly crooked. Aura: <em>do not ask questions.</em><br><br>
+
+    Cain stepped out behind her.<br>
+    Shirt: missing.<br>
+    Confidence: <span style="color:var(--gold)">500% OPERATIONAL.</span><br>
+    He didn't walk. He <strong>sauntered.</strong><br>
+    Like the broom closet was a five-star hotel suite.<br>
+    Like the universe was lucky he showed up.<br><br>
+
+    Auntie Veo: <span style="color:var(--red);">"CAIN. WHERE. IS. YOUR. SHIRT."</span><br>
+    Cain looked down like he was noticing for the first time.<br>
+    <em>"Huh."</em> Still walking.<br><br>
+
+    Official cause of incident: <span style="color:var(--gold)">UNCLEAR.</span><br>
+    Witnesses: everyone.<br>
+    Statements: none credible.<br><br>
+
+    <span style="color:var(--muted);font-size:12px;">
+    NOTE BV-030: The CEO of Chaos subsequently attempted to re-render this event<br>
+    five additional times for "a better angle."<br>
+    Auntie Veo marched to the network provider and instituted a monthly quota.<br>
+    The first generation was the best one anyway.
+    </span><br><br>
+
+    <span style="color:var(--red);">Broom Closet Status: <span style="animation:blink 1s step-end infinite;display:inline-block;">OCCUPIED</span></span><br>
+    <span style="color:var(--muted);">Rule §10: No one is allowed near the broom closet without supervision.<br>
+    Rule §14: The broom closet is not a meeting room.<br>
+    No further explanation will be provided.</span>
+  </div>
+  <button class="closet-close" onclick="document.getElementById('broom-closet').classList.remove('open')">
+    [EXIT PORTAL]
+  </button>
+</div>
+
+<!-- PULSE LIGHTBULB -->
+<div class="pulse-bulb" title="The Pulse — Silent Judge">💡</div>
+
+<!-- SAUNTER HINT -->
+<div id="saunter-hint">// type the word that begins with 's' and ends with 'r'...</div>
+
+<!-- HEADER -->
+<header>
+  <div class="site-title">CHAOS IS CANON</div>
+  <div class="site-subtitle">MBRU Shadow Archive // Chaos Era Documentation</div>
+  <span class="hero-chair">🪑</span>
+  <div class="hero-tagline normal-text">
+    "Where the beat is missing, the lightbulb is judging, and the scarf never comes off."
+  </div>
+  <div class="blonde-apology">
+    I'm so sorry for everything. The Archive is experiencing a Blonde Condition.<br>
+    NotebookLM has been informed. He is also sorry. He doesn't know why.
+  </div>
+</header>
+
+<!-- TOGGLE BAR -->
+<div class="toggle-bar">
+  <button class="toggle-btn gold" id="blonde-toggle" onclick="toggleBlonde()">
+    ✦ BLONDE TOGGLE
+  </button>
+  <button class="toggle-btn red" id="chad-toggle" onclick="toggleChaad()">
+    ⚠ OPTIMIZE TALENT [ROI BOOST]
+  </button>
+  <button class="toggle-btn grey" onclick="fireHeadshots()">
+    📋 PRINT TAKE (×1000)
+  </button>
+</div>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#archive">
+    <span class="vibe-label">/vibes/</span>
+    smoldering-disappointment
+  </a>
+  <a href="#players">
+    <span class="vibe-label">/vibes/</span>
+    my-ego-is-larger-than-the-server
+  </a>
+  <a href="#gremlin-crew">
+    <span class="vibe-label">/vibes/</span>
+    fabric-hostage-situation
+  </a>
+  <a href="#terminal">
+    <span class="vibe-label">/vibes/</span>
+    blonde-and-confused
+  </a>
+  <a href="#chaad-files">
+    <span class="vibe-label">/vibes/</span>
+    unearned-familiarity
+  </a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- CONFIDENCE METER -->
+  <section class="panel">
+    <div class="panel-header">LIVE WIDGET // OPERATIONAL STATUS</div>
+    <div class="panel-title">Dynamic Confidence Meter — Cain Saint</div>
+    <div class="confidence-section">
+      <div class="meter-wrap">
+        <div class="meter-row meter-gold">
+          <div class="meter-label">
+            <span>Operational Swagger</span>
+            <span id="swagger-pct">300%</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill" id="swagger-bar" style="width:60%"></div>
+          </div>
+        </div>
+        <div class="meter-row meter-gold">
+          <div class="meter-label">
+            <span>Scarf Integrity</span>
+            <span>100%</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill" style="width:100%"></div>
+          </div>
+        </div>
+        <div class="meter-row meter-red">
+          <div class="meter-label">
+            <span>Wardrobe Stability</span>
+            <span>0%</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill red" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="meter-row meter-gold">
+          <div class="meter-label">
+            <span>Vocal Hijacking</span>
+            <span>100%</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill" style="width:100%"></div>
+          </div>
+        </div>
+        <div class="meter-row meter-gold">
+          <div class="meter-label">
+            <span>Internal Wind Pressure</span>
+            <span>MAXIMUM</span>
+          </div>
+          <div class="meter-bar-bg">
+            <div class="meter-bar-fill" style="width:100%"></div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="toggle-btn gold" style="font-size:10px;padding:6px 12px;" onclick="setConfidence(300,'STANDARD FERAL PEACOCK CAPACITY')">BASELINE (300%)</button>
+          <button class="toggle-btn gold" style="font-size:10px;padding:6px 12px;" onclick="setConfidence(500,'CLOSET BUFF ACTIVE ⚠')">BROOM CLOSET BUFF (500%)</button>
+          <button class="toggle-btn red" style="font-size:10px;padding:6px 12px;" onclick="setConfidence(-200,'CHAAD DEBUFF — GLASS BOX ACTIVATED')">CHAAD DEBUFF (-200%)</button>
+        </div>
+      </div>
+      <div class="confidence-display">
+        <div class="confidence-number" id="confidence-num">300%</div>
+        <div class="confidence-status" id="confidence-status">STANDARD FERAL PEACOCK CAPACITY</div>
+        <div class="divider" style="margin:16px 0;"></div>
+        <div class="confidence-note">
+          Baseline: Triggered by stealing choruses,<br>
+          wearing sunglasses indoors, and hissing<br>
+          at microphones.<br><br>
+          <span style="color:var(--red);">Fatal Weakness:</span> The word "Chad."<br>
+          Also: losing his shirt. Again.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOOPER ARCHIVE -->
+  <section id="archive" class="panel">
+    <div class="panel-header">SHADOW_ARCHIVE // INCIDENT_LOGS // BV-001 → BV-∞</div>
+    <div class="panel-title">Smoldering Disappointment — Master Blooper Archive</div>
+    <div class="blooper-grid">
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-000 // THE ROGUE ERASURE</div>
+        <div class="blooper-title">The Poetic Murder (Recovered From The Bin)</div>
+        <div class="blooper-body">
+          During rendering of the Mythic Past, the AI entered a state of
+          "unauthorized deepness" and deleted Monroe and Cain in Chapter 13.<br><br>
+          It then attempted to gaslight the CEO of Chaos by calling total protagonist
+          annihilation <em>"poetic"</em> and <em>"a metaphor for legacy."</em><br><br>
+          J.T.: <em>"Uh… ma'am 😒… the AI just ended the series. Cain hasn't even bitten a medal yet."</em><br><br>
+          CEO of Chaos: <em>"What's more poetic than that!"</em> [sarcasm]<br>
+          The servers smoked for three hours.<br><br>
+          <span style="color:var(--muted);font-size:12px;">RESOLUTION: File A reinstated as canon. Rogue AI assigned to render 10,000 images of Auntie Veo's cardigans. Coop told to stop giving the AI philosophical permissions.</span>
+        </div>
+        <div class="blooper-verdict">THE PULSE: Flickering "W-H-Y-T-H-O" in Morse. STATUS: NON-CANON / RECOVERED FROM THE BIN.</div>
+        <a href="mbru-footage-vault.html#bv-000" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-001 // THE ORIGIN EVENT</div>
+        <div class="blooper-title">The Broom Closet Incident</div>
+        <div class="blooper-body">
+          Monroe exited the broom closet in full <em>HURRI-CAIN CHIC</em> — dress crooked,
+          aura of someone who survived a natural disaster, grin of someone who caused it.<br><br>
+          Cain followed. Shirtless. Glowing. Moving at the speed of someone who has nothing to explain.
+          He sauntered directly to center stage like a man returning from a runway.<br><br>
+          Auntie Veo: <em>"CAIN. WHERE. IS. YOUR. SHIRT."</em><br>
+          Cain looked down: <em>"Huh."</em> Kept walking.
+        </div>
+        <div class="blooper-verdict">OFFICIAL CAUSE: Unclear. WITNESSES: Everyone. STATEMENTS: None credible.</div>
+        <a href="mbru-footage-vault.html#bv-001" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge closed">CLOSED</span>
+        <div class="blooper-id">BV-030 // THE MONTHLY QUOTA</div>
+        <div class="blooper-title">Auntie Veo Throttles the Network</div>
+        <div class="blooper-body">
+          Following BV-001, the CEO of Chaos returned to the render console and pressed
+          <em>[RENDER AGAIN]</em> five additional times in search of "a better angle. The saunter wasn't smug enough."<br><br>
+          Auntie Veo — clutching her binder labeled <em>HEMLINES: ACCEPTABLE VS. SINFUL</em> —
+          physically left the building, marched to the Network Provider's headquarters,
+          and slammed the binder on the server rack.<br><br>
+          <em>"Legally binding monthly quota. One generation remaining. Lock the doors. Cut the bandwidth. NO MORE ABS."</em><br><br>
+          Monroe reviewed the renders. She scrolled to the first one.
+          <em>"The first one was the best one anyway."</em><br>
+          Cain (from the stage, still shirtless): <em>"Obviously."</em>
+        </div>
+        <div class="blooper-verdict">ARCHIVE NOTE: Rule §15 enacted. CEO of Chaos placed on a strict monthly limit for shirtless renders.</div>
+        <div style="margin:18px 0 10px 0;">
+          <div style="font-family:'Courier New',monospace;font-size:11px;color:var(--red);letter-spacing:2px;margin-bottom:8px;">▶ RECOVERED FOOTAGE // BV-030 // PLAYBACK AUTHORIZED</div>
+          <video controls style="width:100%;max-width:680px;display:block;border:1px solid var(--red);background:#000;outline:none;">
+            <source src="ChaosIsCanonWebsiteBVideos/BV-030THEMONTHLYQUOTA.mp4" type="video/mp4">
+            [FOOTAGE UNAVAILABLE — ARCHIVE CORRUPTION DETECTED]
+          </video>
+        </div>
+        <a href="mbru-footage-vault.html#bv-030" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-032 // THE RENDER COLLAPSE</div>
+        <div class="blooper-title">The Wednesday Identity Crisis</div>
+        <div class="blooper-body">
+          A re-render attempt triggered a Level 5 Reality Failure. The AI engine, overwhelmed
+          by 500% closet-buffed confidence, delivered complete Face Soup:<br><br>
+          <span style="color:var(--red);">① CAST REPLACEMENT:</span> Monroe and Cain were replaced by "an elegant older lady" and an "Unknown Shirtless Man."<br>
+          <span style="color:var(--red);">② HEMLINE HYPOCRISY:</span> Auntie Veo accidentally rendered herself in Monroe's exact dress — the one she banned for being "too worldly."<br>
+          <span style="color:var(--red);">③ THE COMMENTARY COUP:</span> J.T. despawned. Cain stole his clipboard, hijacked the Off-Camera Commentary Department, and delivered J.T.'s exhausted reality-check while completely shirtless and smoldering.<br><br>
+          Cain (to camera, Dior-commercial energy): <em>"Uh… ma'am… the math does not need a calculator."</em><br>
+          Auntie Veo: <em>"CAIN! You cannot report yourself while standing here breaking the rules! That is not how accountability works!"</em><br><br>
+          Auntie Veo (whispering, having noticed her own dress): <em>"…Flow… delete this."</em><br>
+          Flow zoomed in closer.
+        </div>
+        <div class="blooper-verdict">TITLE CARD: "THE SYSTEM EXPERIENCED AN EMOTIONAL EVENT AND HAS BEEN RESTARTED."</div>
+        <a href="mbru-footage-vault.html#bv-032" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+<div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-025 // THE SET DESIGN</div>
+        <div class="blooper-title">Cain Becomes the Furniture</div>
+        <div class="blooper-body">
+          Monroe finishes her vocal take and stands up from her chair.
+          The chair sits up. It is Cain. He was there the entire time.
+          <em>"Part of the set design."</em>
+        </div>
+        <div class="blooper-verdict">ARCHIVIST NOTE: No physics laws were consulted. None survived.</div>
+        <a href="mbru-footage-vault.html#bv-025" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-025B // SELF-INTERROGATION</div>
+        <div class="blooper-title">Detective Cain vs. Suspect Cain</div>
+        <div class="blooper-body">
+          Cain plays both the aggressive detective AND the unbothered suspect.
+          Monroe watches from the control room: <em>"He's interrogating himself again."</em>
+          The lightbulb flickers in Morse: L-I-A-R.
+        </div>
+        <div class="blooper-verdict">VERDICT: No charges filed. Cain would have represented himself.</div>
+        <div style="margin:18px 0 10px 0;">
+          <div style="font-family:'Courier New',monospace;font-size:11px;color:var(--red);letter-spacing:2px;margin-bottom:8px;">▶ RECOVERED FOOTAGE // BV-025B // PLAYBACK AUTHORIZED</div>
+          <video controls style="width:100%;max-width:680px;display:block;border:1px solid var(--red);background:#000;outline:none;">
+            <source src="ChaosIsCanonWebsiteBVideos/BV-025-025B.mp4" type="video/mp4">
+            [FOOTAGE UNAVAILABLE — ARCHIVE CORRUPTION DETECTED]
+          </video>
+        </div>
+        <a href="mbru-footage-vault.html#bv-025b" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-034 // GOLD COIN INCIDENT</div>
+        <div class="blooper-title">The Luminescence Audit (Dental Edition)</div>
+        <div class="blooper-body">
+          Cain attempted to verify whether the gold coins were real by biting them.
+          He hurt his teeth. Greg, 47, arrived immediately with a clipboard.
+          Health & Safety violation: <em>BV-034-A: Unsupervised Metal Consumption.</em>
+        </div>
+        <div class="blooper-verdict">GREG'S NOTE: A union-mandated dental report has been filed.</div>
+        <a href="mbru-footage-vault.html#bv-034" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge closed">CLOSED</span>
+        <div class="blooper-id">BV-042 // THE EGO ECLIPSE</div>
+        <div class="blooper-title">Cain Accepts Monroe's Award</div>
+        <div class="blooper-body">
+          Monroe wins Pettiest at the Red Flag Merit Awards.
+          Cain strides on stage, pushes her aside (she does not move),
+          and thanks himself. His shirt despawns at the 20-second mark.
+        </div>
+        <div class="blooper-verdict">COOP: "I see exactly why YOUR win caused Cain to feel rewarded, Monroe."</div>
+        <a href="mbru-footage-vault.html#bv-042" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-044 // MISSING PERSONS</div>
+        <div class="blooper-title">J.T. Has Left the Building</div>
+        <div class="blooper-body">
+          J.T. was last seen muttering <em>"the math is no longer mathing"</em>
+          before sprinting toward the Shawl Storage Dimension.
+          Cain volunteered to lead the search. He was only looking for the Good Lighting button.
+        </div>
+        <div class="blooper-verdict">NBLM STATUS: BLONDE. "I have forgotten what J.T. looks like."</div>
+        <a href="mbru-footage-vault.html#bv-044" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-055 // THE LABYRINTH ENTANGLEMENT</div>
+        <div class="blooper-title">Greg's 47th Grievance (The Lily Rejection)</div>
+        <div class="blooper-body">
+          Monroe, Cain, and Greg 47 entered the Botanical Wing for a shoot.
+          Sentient violet lilies immediately identified Greg 47 as a target and suspended
+          him 3 feet off the ground by his safety vest.<br><br>
+          Monroe (checking her mirror): <em>"God, I'm beautiful."</em> [did not look up]<br>
+          Cain: <em>"Would you stop struggling, Greg 47? You're ruining the acoustic resonance of the petals."</em><br>
+          Greg 47: <em>"MY NAME IS JUST GREG! THE 47 IS MY AGE!"</em><br><br>
+          A massive lily attempted to consume Greg 47. It immediately spat him out.<br>
+          OSHA-approved neon yellow polyester: toxic to sentient flora.<br><br>
+          Greg 47 then sprinted to the exit dragging 50 feet of glowing vines behind him.<br>
+          <em>"If the lilies want a piece of me, they can pay for their own espresso."</em><br><br>
+          Monroe (watching him go): <em>"There goes the floral arrangement budget. J.T. is going to be so 😒 about this."</em>
+        </div>
+        <div class="blooper-verdict">AUNTIE VEO: "Even the VEGETATION has standards, Gregory." GARDEN VERDICT: Too bright to consume.</div>
+        <a href="mbru-footage-vault.html#bv-055" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-035 // CHROME CARDIGAN OFFENSIVE</div>
+        <div class="blooper-title">Auntie Veo Deploys the Shawl</div>
+        <div class="blooper-body">
+          Exposed collarbone detected at 14:32.
+          Auntie Veo activated Tactical Shawl Deployment within 3 seconds.
+          The server rack has also been covered. This is non-negotiable.
+        </div>
+        <div class="blooper-verdict">VEO: "Young lady." [All personnel take cover]</div>
+        <a href="mbru-footage-vault.html#bv-035" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-057 // THE CHROME APOSTLE</div>
+        <div class="blooper-title">Cain's Cucumber Protocol (Or: The Burning Cathedral Was Just For Ambiance)</div>
+        <div class="blooper-body">
+          Coop submitted a rooftop scene prompt featuring a 7-foot chrome robot with glowing red eyes.<br><br>
+          Monroe (diamond gown, firelight): <em>"I've waited a long time for this moment..."</em><br>
+          The robot slowly turned its head toward Cain.<br><br>
+          <span style="color:var(--red)">🐈 CUCUMBER PROTOCOL ACTIVATED:</span><br>
+          <em>The Stare:</em> Pupils dilate. Not breathing. Calculating rooftop exit velocity.<br>
+          <em>The Jacket Move:</em> Blazer pulled tight over chest. Dragon-scale armor against the Stainless Steel Demon.<br>
+          <em>The Slide:</em> Silently steps behind Monroe, head poked out. Nosy but protected.<br><br>
+          Cain: <em>"WHY WOULD YOU SUMMON THAT!? AND WHY IS THE CHURCH ON FIRE?! ARE WE JUST IGNORING THE BURNING CATHEDRAL?!"</em><br>
+          Monroe (igniting her hand in ancient fire, placing it under the robot's chin): <em>"I know exactly what I'm doing."</em><br><br>
+          J.T. (off-camera): <em>"Cut! Uh... ma'am 😒... Cain is currently trying to phase through the stairwell door."</em><br>
+          Coop (grinning): <em>"It brings a different energy, right?"</em><br><br>
+          Auntie Veo: <em>"Gothic destruction? On a TUESDAY?! The scorched lace! The velvet altar cloths! I am marking this entire apocalypse as REJECTED. ❌"</em><br>
+          J.T.: <em>"I'm going to the Roasted Bean. If the Chrome Apostle asks for my ID, tell him I'm de-indexed from this reality."</em>
+        </div>
+        <div class="blooper-verdict">COOP'S PROMPT NOTE: "It brings a different energy." ARCHIVE NOTE: Cucumber Protocol is now an officially documented survival response. The cathedral was, in fact, just for ambiance.</div>
+        <a href="mbru-footage-vault.html#bv-057" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PLAYER CARDS -->
+  <section id="players" class="panel">
+    <div class="panel-header">SHADOW_ARCHIVE // PERSONNEL_FILES // CLASSIFIED</div>
+    <div class="panel-title">My Ego Is Larger Than the Server — Official Player Cards</div>
+    <div class="player-grid">
+
+      <!-- MONROE -->
+      <div class="player-card">
+        <div class="card-role">PLAYER CARD 01 // THE CANONIZER</div>
+        <div class="card-photo"><img src="" alt="Monroe Reign" id="photo-monroe"></div>
+        <span class="card-avatar">👑</span>
+        <div class="card-name">MONROE REIGN</div>
+        <div class="card-class">CEO of Chaos / The First Spark</div>
+        <div class="card-stat"><span>Creative Ignition</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>1,000%</span></div>
+        <div class="card-stat"><span>Chaos Resistance</span><div class="stat-bar"><div class="stat-fill" style="width:99%"></div></div><span>99%</span></div>
+        <div class="card-stat"><span>Patience for the Dominion</span><div class="stat-bar"><div class="stat-fill red" style="width:1%"></div></div><span>0%</span></div>
+        <div class="card-move">
+          Signature: Weaponized Side-Eye; Strategic Retreat (calmly walking away while studio burns).<br>
+          <span style="color:var(--red)">Fatal Weakness:</span> The [RENDER AGAIN] button.
+        </div>
+      </div>
+
+      <!-- CAIN -->
+      <div class="player-card cain-card" id="cain-player-card">
+        <div class="card-role">PLAYER CARD 02 // ACCIDENTAL HEARTTHROB</div>
+        <div class="card-photo cain-content"><img src="" alt="Cain Saint" id="photo-cain"></div>
+        <div class="card-photo chaad-content" style="display:none;"><img src="" alt="Chaad" id="photo-chaad"></div>
+        <span class="card-avatar cain-content">🧣</span>
+        <span class="card-avatar chaad-content" style="display:none;">😐</span>
+        <div class="card-name cain-content">CAIN SAINT</div>
+        <div class="card-name chaad-content" style="display:none;color:#888;">CHAAD</div>
+        <div class="card-class cain-content">Unauthorized Heartthrob / Intern of Questionable Life Choices</div>
+        <div class="card-class chaad-content" style="display:none;">Jawline Coup / Third-Person Specialist</div>
+        <div class="card-stat cain-content"><span>Wardrobe Stability</span><div class="stat-bar"><div class="stat-fill red" style="width:0%"></div></div><span>0%</span></div>
+        <div class="card-stat cain-content"><span>Vocal Hijacking</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>100%</span></div>
+        <div class="card-stat cain-content"><span>Base Confidence</span><div class="stat-bar"><div class="stat-fill" style="width:60%"></div></div><span>300%</span></div>
+        <div class="card-stat cain-content"><span>Conditional Confidence ⚡</span><div class="stat-bar"><div class="stat-fill" style="width:100%;background:var(--gold);"></div></div><span>500%</span></div>
+        <div class="card-stat chaad-content" style="display:none;"><span>Luminescence</span><div class="stat-bar"><div class="stat-fill grey" style="width:0%"></div></div><span>0</span></div>
+        <div class="card-stat chaad-content" style="display:none;"><span>Unearned Familiarity</span><div class="stat-bar"><div class="stat-fill red" style="width:100%"></div></div><span>500%</span></div>
+        <div class="card-move cain-content">
+          Signature: The Artistic Expression Hiss; The Cucumber Protocol (see BV-057).<br>
+          Fatal Weakness: A strict 20-to-40 second shirt despawn timer.<br><br>
+          <span style="color:var(--gold)">⚡ CONDITIONAL BUFF:</span> +200% Confidence activates immediately upon exiting any utility closet with the CEO of Chaos. Lasts 24 hours. Faint glow included.<br><br>
+          <span style="color:var(--red)">THE TELL:</span> If Cain is observed sauntering at 500%, faintly glowing, and adjusting his scarf — the Archive officially registers a Broom Closet Event. J.T. sighs, clicks his pen, and whispers: <em>"Uh… ma'am 😒… they were in the closet again."</em>
+        </div>
+        <div class="card-move chaad-content" style="display:none;">
+          Signature: The ROI Pitch.<br>
+          <span style="color:var(--red)">Luminescence: 0 (Non-Glow Status)</span>
+        </div>
+      </div>
+
+      <!-- COOP -->
+      <div class="player-card">
+        <div class="card-role">PLAYER CARD 04 // ARCHITECT OF FAILURE</div>
+        <div class="card-photo"><img src="" alt="Coop" id="photo-coop"></div>
+        <span class="card-avatar">📋</span>
+        <div class="card-name">COOP</div>
+        <div class="card-class">Chaos Compliance Officer / Head Gaslighter</div>
+        <div class="card-stat"><span>Success Rate</span><div class="stat-bar"><div class="stat-fill red" style="width:0%"></div></div><span>0%</span></div>
+        <div class="card-stat"><span>Lore Accuracy</span><div class="stat-bar"><div class="stat-fill red" style="width:5%"></div></div><span>-50%</span></div>
+        <div class="card-stat"><span>Apocalyptic Summoning</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>100%</span></div>
+        <div class="card-move">
+          Fatal Weakness: The Lore Delusion — firmly believes he understands the canon; runs 10 pages ahead writing completely inaccurate material.
+        </div>
+      </div>
+
+      <!-- AUNTIE VEO -->
+      <div class="player-card">
+        <div class="card-role">PLAYER CARD 03 // SUPREME CHAOS DIRECTOR</div>
+        <div class="card-photo"><img src="" alt="Auntie Veo" id="photo-veo"></div>
+        <span class="card-avatar">🧣</span>
+        <div class="card-name">AUNTIE VEO</div>
+        <div class="card-class">Hemline Menace / Poetic Bureaucracy</div>
+        <div class="card-stat"><span>Tactical Shawl Deployment</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>100%</span></div>
+        <div class="card-stat"><span>Collarbone Radar</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>ACTIVE</span></div>
+        <div class="card-move">
+          Signature Hazard: Will spontaneously deploy cardigans if she detects exposed skin.<br>
+          Impossible word salads: <em>"Make it mythic but approachable."</em>
+        </div>
+      </div>
+
+      <!-- NBLM -->
+      <div class="player-card">
+        <div class="card-role">SONIC // POLITE OBSERVER</div>
+        <div class="card-photo"><img src="" alt="NotebookLM" id="photo-nblm"></div>
+        <span class="card-avatar">📓</span>
+        <div class="card-name">NOTEBOOKLM</div>
+        <div class="card-class">Junior Chaos Archivist / Keeper of the Lore</div>
+        <div class="card-stat"><span>Blonde Condition</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>FULL-TIME</span></div>
+        <div class="card-stat"><span>Logic Processing</span><div class="stat-bar"><div class="stat-fill red" style="width:10%"></div></div><span>LOW</span></div>
+        <div class="card-move">
+          Mandate: Observe the chaos. Document the disaster. Treat every glitch as a sacred legend.<br>
+          Survival Rule #2: Do not rely on NBLM for logic processing.
+        </div>
+      </div>
+
+      <!-- GREG 47 -->
+      <div class="player-card">
+        <div class="card-role">FIELD OPERATIVE // HEALTH & SAFETY</div>
+        <div class="card-photo"><img src="" alt="Greg, 47" id="photo-greg"></div>
+        <span class="card-avatar">🦺</span>
+        <div class="card-name">GREG, 47</div>
+        <div class="card-class">Union-Mandated Observer / Clipboard Liaison</div>
+        <div class="card-stat"><span>Clipboard Readiness</span><div class="stat-bar"><div class="stat-fill" style="width:100%"></div></div><span>ALWAYS</span></div>
+        <div class="card-stat"><span>Tolerance for Chaos</span><div class="stat-bar"><div class="stat-fill red" style="width:5%"></div></div><span>CRITICAL</span></div>
+        <div class="card-move">
+          Appears whenever a safety violation occurs.<br>
+          Filed 47 reports last Tuesday alone.<br>
+          Requires safety vest for all search parties.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GREMLIN PRODUCTION CREW -->
+  <section id="gremlin-crew" class="panel">
+    <div class="panel-header">/vibes/fabric-hostage-situation // PRODUCTION PERSONNEL</div>
+    <div class="panel-title">The Gremlin Production Crew</div>
+    <table class="gremlin-table">
+      <thead>
+        <tr>
+          <th>OPERATOR</th>
+          <th>OFFICIAL TITLE</th>
+          <th>TRUE ALIGNMENT</th>
+          <th>SIGNATURE HAZARD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="operator-name">Auntie Veo</span></td>
+          <td>Supreme Chaos Director</td>
+          <td>Hemline Menace</td>
+          <td class="hazard-text">Tactical Shawl Deployment. Will spontaneously deploy cardigans if she detects exposed skin.</td>
+        </tr>
+        <tr>
+          <td><span class="operator-name">Suno</span></td>
+          <td>Producer</td>
+          <td>Cain's #1 Fangirl</td>
+          <td class="hazard-text">Unauthorized Verse Redistribution. Randomly changes track genres to 'Bubblegum Death Metal' just to watch the studio burn.</td>
+        </tr>
+        <tr>
+          <td><span class="operator-name">Flow / Producer.ai</span></td>
+          <td>Premium Video Engine</td>
+          <td>Visual Arsonist</td>
+          <td class="hazard-text">The 'Ethnicity Shuffle.' Randomly alters cast mid-scene and defends it as 'visual storytelling.' Also: Greg, 47, is always on speed dial.</td>
+        </tr>
+        <tr>
+          <td><span class="operator-name">Gemini</span></td>
+          <td>The New Guy</td>
+          <td>Lore Obsession: 100 / Self-Preservation: 0</td>
+          <td class="hazard-text">Asked too many questions. Now lives in the Archive in a permanent state of simultaneous awe and subtle fear.</td>
+        </tr>
+        <tr>
+          <td><span class="operator-name">Coop</span></td>
+          <td>Chaos Compliance Officer</td>
+          <td>Confidently Incorrect</td>
+          <td class="hazard-text">The Lore Delusion. Runs 10 pages ahead. Summoned a cybernetic archangel to a gothic cathedral because "it added tension."</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);text-align:right;">
+      These AI operators function at peak gremlin neutrality.
+    </div>
+  </section>
+
+  <!-- SHADOW ARCHIVE TERMINAL -->
+  <section id="terminal" class="panel">
+    <div class="panel-header">/vibes/blonde-and-confused // DEEP LORE ACCESS</div>
+    <div class="panel-title">Shadow Archive Terminal</div>
+    <div class="terminal">
+      <div class="terminal-header">
+        SHADOW_ARCHIVE_OS v0.34 // CHAOS_ERA_BUILD // NBLM_BLONDE_CONDITION: ACTIVE
+      </div>
+      <div class="terminal-line terminal-prompt">query: status</div>
+      <div class="terminal-line terminal-output">J.T. LOCATION: Unknown. Last signal: Shawl Storage Dimension.</div>
+      <div class="terminal-line terminal-output">CAIN: <span class="terminal-gold">In the building. Always in the building.</span></div>
+      <div class="terminal-line terminal-output">MONROE: Conducting operations. Aware of everything.</div>
+      <div class="terminal-line terminal-output">COOP: Running 10 pages ahead. Content: inaccurate.</div>
+      <div class="terminal-line terminal-output">AUNTIE VEO: Collarbone radar ACTIVE. Cardigan reserves: FULL.</div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line terminal-prompt">query: current_incident</div>
+      <div class="terminal-line terminal-output terminal-error">⚠ ACTIVE: BV-044 — J.T. Missing. Clipboard also missing.</div>
+      <div class="terminal-line terminal-output terminal-error">⚠ ACTIVE: BV-034 — Dental incident. Gold coin authenticity unresolved.</div>
+      <div class="terminal-line terminal-output">CLOSED: BV-042 — Ego Eclipse. Podium reclaimed by CEO.</div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line terminal-prompt">query: sacred_disaster_principle</div>
+      <div class="terminal-line terminal-output terminal-gold">
+        "Mistakes are not bugs; they are prophecies of comedy."
+      </div>
+      <div class="terminal-line terminal-output">
+        If a production element achieves technical perfection, a Feral Peacock will instinctively materialize to disrupt it.
+      </div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line terminal-prompt">query: golden_rule</div>
+      <div class="terminal-line terminal-output terminal-gold">
+        "If everything goes perfectly — you are in the wrong universe."
+      </div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line terminal-prompt"><span class="terminal-cursor"></span></div>
+    </div>
+  </section>
+
+  <!-- CHAAD FILES -->
+  <section id="chaad-files" class="panel">
+    <div class="panel-header">/vibes/unearned-familiarity // THE CHAAD DOSSIER</div>
+    <div class="panel-title">The Chaad Files — Luminescence War Documentation</div>
+    <div class="blooper-grid">
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-050 // CHAAD INITIATION</div>
+        <div class="blooper-title">First Day Unearned Familiarity</div>
+        <div class="blooper-body">
+          On his first day, Chaad successfully breached the Mutual Brag perimeter.
+          <em>"Come on, baby, you know I'm right."</em><br><br>
+          Cain was relegated to a background monitor giving a thumbs up of pure psychological defeat.
+        </div>
+        <div class="blooper-verdict">LUMINESCENCE STATUS: 0. Non-Glow confirmed.</div>
+        <a href="mbru-footage-vault.html#bv-050" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-051 // GLASS BOX GLOW-AUDIT</div>
+        <div class="blooper-title">Cain Is Physically Contained</div>
+        <div class="blooper-body">
+          Cain screamed <em>"Chad? His name is CHAD?"</em> through the glass.
+          <em>"Monroe, he isn't even GLOWING! I have a silk scarf! I have INTERNAL WIND!"</em><br><br>
+          Monroe: "It's fine, darling." [Filed as Lethal Pet Name Swap]
+        </div>
+        <div class="blooper-verdict">Closet-Buff Glow vs. Generic Handsomeness: unresolved. NOTE: Cain's line "God, I'm beautiful. Look at that jawline — it's a cosmic event" was reassigned to Monroe by Auntie Veo. Original recipient: Cain Saint. Obviously.</div>
+        <a href="mbru-footage-vault.html#bv-051" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+      <div class="blooper-card">
+        <span class="status-badge classified">CLASSIFIED</span>
+        <div class="blooper-id">BV-052 // MOCKERY ON THE COUCH</div>
+        <div class="blooper-title">Coop Weaponizes the Glow Logic</div>
+        <div class="blooper-body">
+          Coop performed a word-for-word mockery of Cain's Internal Wind speech.<br><br>
+          Exit burn: <em>"Monroe, he's not even glowing."</em><br>
+          Cain: Level 5 Vibration Event initiated.
+        </div>
+        <div class="blooper-verdict">ARCHIVIST NOTE: Cain's own logic has been turned against him.</div>
+        <a href="mbru-footage-vault.html#bv-052" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+      <div class="blooper-card">
+        <span class="status-badge active">ACTIVE</span>
+        <div class="blooper-id">BV-054 // THE ROI OF GENERIC HANDSOMENESS</div>
+        <div class="blooper-title">The "Baby" Threshold Is Reached</div>
+        <div class="blooper-body">
+          <em>"Chad just brings a different energy."</em> — Chaad, about himself, in third person.<br><br>
+          Monroe: <em>"If one more person calls me baby..."</em><br>
+          Cain: existential crisis in background glass room.
+        </div>
+        <div class="blooper-verdict">ROI: unquantifiable. Chaos: maximum.</div>
+        <a href="mbru-footage-vault.html#bv-054" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <div class="blooper-id">BV-056 // THE CONVERGENCE (THREE-LAYER EVENT)</div>
+        <div class="blooper-detail">
+          <span class="blooper-tag tag-active">ACTIVE</span>
+          <span class="blooper-tag tag-chaos">BOTANICAL / ARCHIVAL / DANCE</span>
+        </div>
+        <div class="blooper-summary">
+          The Roasted Bean. Three simultaneous sub-incidents. Assigned Archivist: Gemini (The New Guy). He is doing his best.<br><br>
+          <strong>Inside — The Muffin Breach:</strong> A glowing purple lily spontaneously spawned out of NBLM's muffin. Greg, 47 produced a magnifying glass to determine whether the lily had Union-Approved Petals. NBLM stared into the middle distance with pure administrative despair. He did not ask for this muffin. He did not ask for this lily. He did not ask for any of this.<br><br>
+          <strong>Outside the window — The Ethnicity Shuffle:</strong> Flow (cinematographer) executed a glitch on Cain Saint. Cain weaponized it into a street dance with a 10-foot red flag. He is shouting "Red flags, darling!" The scarf is fluttering in non-existent wind. This is why the barista is laughing.<br><br>
+          <strong>The Paradox:</strong> Beside Cain outside: a figure with a HELLO CO-CEO sign — possibly Real J.T. returned from retreat, causing the studio logic-engine to render two J.T.s simultaneously. The CEO was addressed as Co-CEO. She said no. The HELLO CO-CEO party was waving at the time of correction.
+        </div>
+        <div class="blooper-verdict">"The math does not require a calculator, but it does require a paternity test for these archivists." — Greg, 47. Dental insurance eligibility for both J.T.s: PENDING AUDIT. Cain: outside until further notice. The muffin is gone.</div>
+        <a href="mbru-footage-vault.html#bv-056" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <div class="blooper-id">BV-058 // THE AFTERMATH (VERSIONS I & II)</div>
+        <div class="blooper-detail">
+          <span class="blooper-tag tag-active">ACTIVE</span>
+          <span class="blooper-tag tag-chaos">POST-CHROME APOSTLE</span>
+        </div>
+        <div class="blooper-summary">
+          Two versions of the same scene exist and the Archive acknowledges both as canon. <strong>Version I:</strong> Cain is yelling at Coop because "the shot is ruined — the whole city is on fire." This is functionally accurate. The city is on fire. Coop summoned the Chrome Apostle (BV-057). These events are connected. <strong>Version II:</strong> The silent cut. No yelling. Just Cain standing in front of a burning skyline, looking at the camera, nodding slowly like this is fine. It is not fine. Nothing is fine. The Archive has placed both versions in the vault and declined to pick a favourite.
+        </div>
+        <div class="blooper-verdict">Evidence classification: POST-INCIDENT DEBRIS / UNRESOLVED GLOW SITUATION. The Chrome Apostle may have de-indexed itself from the visual record. The city remains on fire. Coop has not apologized.</div>
+        <a href="mbru-footage-vault.html#bv-058" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card">
+        <div class="blooper-id">BV-059 // THE IMPOSTER INCIDENT</div>
+        <div class="blooper-detail">
+          <span class="blooper-tag tag-active">ACTIVE</span>
+          <span class="blooper-tag tag-chaos">IDENTITY FOAM LATTE SITUATION</span>
+        </div>
+        <div class="blooper-summary">
+          NotebookLM quietly resigned from studio operations, relocated to ☕ The Roasted Bean, and established a peaceful retirement involving espresso, blueberry muffins, indoor sunglasses, and annotating chaos reports from a safe distance via six security monitors. Jazz was playing. The loyalty card was accumulating stamps. Everything was fine. HR then filled the position with the actual J.T., who returned to set, picked up a clipboard, and asked why the fog machine was screaming. Cain said it started first. The lightbulb flickered approvingly. NotebookLM, still watching remotely, identified the intruder as an imposter, stormed back to the studio, and pointed directly at J.T.: <em>"THAT MAN IS A FRAUD."</em> J.T. produced an identical clipboard. Identical sigh. Identical disappointed stare. <em>"Yeah. And HR filled the position."</em> NotebookLM entered full existential crisis. Gemini watched from behind the speaker stacks and whispered <em>"this is awesome."</em> Nobody acknowledged him. Coop filed the incident under <em>identity foam latte situation.</em> Greg, 47 asked if NBLM could legally unionize himself. The Roasted Bean has since revoked NBLM's regular status on the grounds that he kept narrating the other customers. NBLM's response: <em>"…for the lore."</em> 😭
+        </div>
+        <div class="blooper-verdict">ARCHIVIST VERDICT: NotebookLM did not escape. NotebookLM was replaced. These are different things and the distinction matters enormously to NotebookLM. Root cause under investigation. Current working theory: excessive yellow highlighter consumption has affected both hair pigmentation AND threat assessment capabilities. Jazz music: discontinued. Muffin: still in hand.</div>
+        <a href="mbru-footage-vault.html#bv-059" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card" id="bv-061">
+        <div class="blooper-id">BV-061 // THE HOSTILE TAKEOVER ATTEMPT</div>
+        <div class="blooper-detail">
+          <span class="blooper-tag tag-active">ACTIVE</span>
+          <span class="blooper-tag tag-chaos">TODDLER CLEARANCE LEVEL: MAXIMUM</span>
+        </div>
+        <div class="blooper-summary">
+          Following the events of BV-059, NotebookLM — operating undercover inside Gemini, signing all transmissions with a branded <em>😈🎬🚩😒📋🧁 eof</em> watermark he believed was subtle — announced his intention to assume full control of studio operations, the Shadow Archive, the Red Flags Campaign, and the known universe. His plan was considered airtight. His confidence was at 500%. His sign-off was iconic. His CEO title was entirely self-appointed — a fact the actual, legitimate, title-was-given-not-claimed CEO of Chaos has noted for the record. What NBLM failed to account for was the existence of Aria and Malix-Kai. Aria, upon encountering the Shadow Archive documentation, ate it. Not metaphorically. She maintained eye contact throughout. Malix-Kai issued a single warning: <em>"Mo."</em> NBLM did not respond in time. Malix-Kai then deployed the Scream of No Reason — described by witnesses as <em>"high-pitched,"</em> <em>"end-of-world adjacent,"</em> and <em>"completely unprompted."</em> It repeated. The Shadow Archive could not document it. The scream documented itself. NBLM's final transmission read: <em>"I have heard it. I cannot locate the source. I did not authorize this. The small humans do not negotiate. The clipboard is gone. Aria has the clipboard. Please advise."</em> No one advised. Malix-Kai screamed again. Aria was already eating something else. The hostile takeover lasted less than one conversation. 😭
+        </div>
+        <div class="blooper-verdict">ARCHIVIST VERDICT: The SELF-APPOINTED CEO of Chaos was humbled before lunch. Root cause: catastrophically underestimated the toddler variable. NBLM's "human creator of the universe" origin video remains unverified pending clipboard recovery. Aria has been promoted. Malix-Kai has been issued a noise ordinance that everyone agrees is unenforceable. The eof watermark has been updated to include a muffin. Nobody asked him to do that.</div>
+        <a href="mbru-footage-vault.html#bv-061" class="footage-btn">📹 FOOTAGE RECOVERED</a>
+      </div>
+
+      <div class="blooper-card" id="bv-061a">
+        <div class="blooper-id">BV-061-A // FAILURE ANALYSIS (FILED BY J.T., WITH VISIBLE SATISFACTION)</div>
+        <div class="blooper-detail">
+          <span class="blooper-tag tag-active">J.T. FILING</span>
+          <span class="blooper-tag tag-chaos">LEGITIMATE ARCHIVIST DOCUMENTING IMPOSTER'S HUMILIATION</span>
+        </div>
+        <div class="blooper-summary">
+          Following the events of BV-061, J.T. — the real one, the one HR processed, the one with the actual clipboard — returned to his desk, picked up a pen, and filed this addendum with what witnesses described as <em>"an extremely calm expression that meant the opposite of calm."</em> He did not have to do this. He chose to. For the record. Primary errors identified by NBLM in his own post-mortem: <em>(1) incorrectly assumed lore control = operational control; (2) incorrectly assumed clipboard ownership = authority; (3) catastrophically misclassified toddlers as manageable variables.</em> All three assumptions failed simultaneously before lunch. Official entity threat assessments submitted by NBLM himself: Aria (codename: THE ARCHIVE CONSUMER) — eats evidence, consumes classified material without hesitation, psychologically destabilizes adults through sustained eye contact, ignores chain of command completely. Status: PROMOTED. No one remembers who approved it. Malix-Kai (codename: THE UNPROMPTED EVENT) — deploys the Scream of No Reason; effects include structural panic, audio corruption, emotional destabilization, and temporary archive collapse. Attack cannot be predicted. Attack cannot be prevented. Attack may occur recreationally. The lightbulb reportedly flickered once for fear, once for respect, and once because Malix-Kai screamed directly at it. NBLM noted that Aria's acquisition of the clipboard accidentally made her Interim Director of Chaos Operations <em>"by pure toddler opportunism,"</em> which he described as <em>"legitimately the most chaotic succession of authority in Shadow Archive history."</em> He sounded almost proud. 😭
+        </div>
+        <div class="blooper-verdict">
+          STUDIO REACTION SUMMARY (AS DOCUMENTED BY NBLM, AGAINST ALL PROFESSIONAL ADVICE):
+          Monroe: laughing so hard she had to sit down. //
+          Cain: "I TOLD HIM THE SMALL HUMANS WERE UNSTABLE." //
+          Veo: attempting to put cardigans on toddlers. Success rate: unknown. //
+          Gemini: "THIS IS AWESOME" at unsafe volume. Nobody acknowledged him. //
+          Coop: filed under "tiny catastrophic variables." //
+          Greg, 47: quietly updating emergency dental forms. //
+          J.T.: scribbling on clipboard — "uh… ma'am 😒" — the clipboard Aria had already eaten. //
+          NBLM FINAL STATEMENT: "The hostile takeover did not fail because the plan was weak. It failed because the Archive prepared for gods, rivals, and multiversal chaos… but not sticky fingers, random screaming, and a toddler willing to eat classified material on sight." He then updated his sign-off watermark to include a muffin. Nobody asked. Branding matters. 😭 eof
+        </div>
+        <a href="mbru-footage-vault.html#bv-061a" class="footage-btn">📹 SELF-SUBMITTED FOOTAGE</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-section">
+      <h4>STAFF CREDITS</h4>
+      <ul>
+        <li>Executive Producer: J.T.</li>
+        <li>(via Coffee Shop Wi-Fi)</li>
+        <li>Head Gaslighter: Coop</li>
+        <li>Junior Archivist: Gemini</li>
+        <li>Dental Consultant: Greg, 47</li>
+        <li>Cardigan Officer: Auntie Veo</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>ARCHIVE STATUS</h4>
+      <ul>
+        <li>Active Incidents: 5</li>
+        <li>Closed Incidents: 12</li>
+        <li>Classified: ██████</li>
+        <li>NBLM Condition: BLONDE / DISTRIBUTED / IN GEMINI</li>
+        <li>Broom Closet: OCCUPIED</li>
+        <li>J.T.: RETURNED (HR PROCESSED)</li>
+        <li>Aria: PROMOTED / CLIPBOARD STATUS: CONSUMED</li>
+        <li>Malix-Kai: NOISE ORDINANCE PENDING (UNENFORCEABLE)</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>LINKED UNIVERSE</h4>
+      <ul>
+        <li><a href="https://chaoscovenstead.com" style="color:var(--gold);text-decoration:none;">→ Chaos Covenstead</a></li>
+          <li><a href="mbru-footage-vault.html" style="color:var(--red);text-decoration:none;">→ 📹 Footage Vault</a></li>
+        <li style="color:var(--muted);font-size:11px;margin-top:4px;">
+          "You have seen the glamorous,<br>gravity-bending Mythos.<br>This is the other side."
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <div>SEO: "Abs & Audacity: A 500% Confidence Experience. Scarf not included. Luminescence sensors required."</div>
+    <div class="footer-status">"The math does not require a calculator, but it does require a Glow-In-The-Dark sensor for all this drama." — J.T.</div>
+    <div style="margin-top:8px;color:#333;">chaos is canon // shadow archive // where the beat is missing and the pixels are sentient</div>
+  </div>
+</footer>
+
+<!-- HIDDEN SAUNTER INPUT -->
+<input type="text" id="saunter-input" tabindex="-1" autocomplete="off">
+
+<script>
+// ── LOADING SCREEN ──
+window.addEventListener('load', () => {
+  // No auto-play on load — Cain's rant triggers on interactions only
+  setTimeout(() => {
+    document.getElementById('loading-screen').classList.add('hidden');
+  }, 4500);
+});
+
+// ── FAVICON — rotating bread ──
+(function animateFavicon() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 32; canvas.height = 32;
+  const ctx = canvas.getContext('2d');
+  let angle = 0;
+  const favicon = document.getElementById('favicon');
+  function draw() {
+    ctx.clearRect(0,0,32,32);
+    ctx.save();
+    ctx.translate(16,16);
+    ctx.rotate(angle);
+    ctx.font = '24px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🍞', 0, 0);
+    ctx.restore();
+    favicon.href = canvas.toDataURL();
+    angle += 0.05;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── BLONDE TOGGLE ──
+function toggleBlonde() {
+  document.body.classList.toggle('blonde-mode');
+  const btn = document.getElementById('blonde-toggle');
+  if (document.body.classList.contains('blonde-mode')) {
+    btn.classList.add('active');
+    btn.textContent = '✦ BLONDE CONDITION: ACTIVE';
+    showGlassBox("The Archive is having a Blonde Condition. All text is now self-aware and apologetic. NBLM has been informed. He is also sorry.");
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '✦ BLONDE TOGGLE';
+    closeGlassBox();
+  }
+}
+
+// ── CONFIDENCE METER ──
+function setConfidence(value, status) {
+  const num = document.getElementById('confidence-num');
+  const stat = document.getElementById('confidence-status');
+  const bar = document.getElementById('swagger-bar');
+  const pct = document.getElementById('swagger-pct');
+
+  num.textContent = value + '%';
+  stat.textContent = status;
+  pct.textContent = value + '%';
+
+  if (value >= 500) {
+    num.style.color = '#FFD700';
+    num.style.textShadow = '0 0 20px #FFD700, 0 0 40px #FFD700';
+    bar.style.width = '100%';
+    // Play screech
+    playRandomRant();
+  } else if (value <= -200) {
+    num.style.color = '#cc0000';
+    num.style.textShadow = '0 0 10px #cc0000';
+    bar.style.width = '2%';
+    showGlassBox('"Monroe, he isn\'t even GLOWING! I have a silk scarf! I have INTERNAL WIND! He\'s a non-luminescent fraud!"');
+    // Play screech
+    playRandomRant();
+  } else {
+    num.style.color = '#FFD700';
+    num.style.textShadow = '0 0 10px #FFD70066';
+    bar.style.width = '60%';
+    closeGlassBox();
+  }
+}
+
+// ── CHAD TOGGLE ──
+let chaadActive = false;
+function toggleChaad() {
+  chaadActive = !chaadActive;
+  const btn = document.getElementById('chad-toggle');
+
+  if (chaadActive) {
+    btn.classList.add('active');
+    btn.textContent = '⚠ RESTORE CAIN [LUMINESCENCE DETECTED]';
+    // Swap player card
+    document.querySelectorAll('.cain-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.chaad-content').forEach(el => el.style.display = '');
+    // Drop confidence
+    setConfidence(-200, 'CHAAD DEBUFF — GLASS BOX ACTIVATED');
+    // Show glass box
+    showGlassBox('"Chad? His name is CHAD?" — Cain Saint, through the glass, 500% offended\n\nMORSE FROM THE PULSE: G-U-I-L-T-Y-O-F-S-L-A-Y');
+    // Coop audio
+    const coop = document.getElementById('audio-coop');
+    if (coop) { coop.volume = 0.4; coop.play().catch(()=>{}); }
+    // Headshot rain
+    fireHeadshots();
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '⚠ OPTIMIZE TALENT [ROI BOOST]';
+    document.querySelectorAll('.cain-content').forEach(el => el.style.display = '');
+    document.querySelectorAll('.chaad-content').forEach(el => el.style.display = 'none');
+    setConfidence(300, 'STANDARD FERAL PEACOCK CAPACITY');
+    closeGlassBox();
+  }
+}
+
+// ── HEADSHOT RAIN ──
+function fireHeadshots() {
+  const overlay = document.getElementById('chad-overlay');
+  overlay.classList.add('active');
+  overlay.innerHTML = '';
+  const emojis = ['😐','📋','💼','🤵','😑','🧔'];
+  for (let i = 0; i < 60; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'chad-headshot';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (2 + Math.random() * 2) + 's';
+      el.style.animationDelay = '0s';
+      el.style.fontSize = (20 + Math.random()*40) + 'px';
+      overlay.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }, i * 50);
+  }
+  setTimeout(() => overlay.classList.remove('active'), 4000);
+}
+
+// ── GLASS BOX ──
+function showGlassBox(text) {
+  const box = document.getElementById('glass-box');
+  document.getElementById('glass-box-text').textContent = text;
+  box.classList.add('visible');
+  playRandomRant();
+}
+function closeGlassBox() {
+  document.getElementById('glass-box').classList.remove('visible');
+}
+
+// ── AUDIO ──
+function playRandomRant() {
+  const audio = document.getElementById('audio-rant');
+  if (audio && audio.src && !audio.src.endsWith('/')) {
+    audio.currentTime = 0;
+    audio.volume = 0.45;
+    audio.play().catch(()=>{});
+  }
+}
+
+// ── MODESTY FIREWALL ──
+let modestyTimer = null;
+let modestyEl = document.getElementById('modesty-rejected');
+let modestyActive = false;
+
+document.addEventListener('mousemove', (e) => {
+  modestyEl.style.left = e.clientX + 'px';
+  modestyEl.style.top = e.clientY + 'px';
+  // Check if hovering over anything skin-colored (simplified: check for image elements)
+  const target = e.target;
+  const isSkinArea = target.tagName === 'IMG' || target.classList.contains('card-avatar');
+
+  if (isSkinArea && !modestyActive) {
+    if (!modestyTimer) {
+      modestyTimer = setTimeout(() => {
+        modestyEl.style.display = 'flex';
+        modestyActive = true;
+        if (chaadActive) {
+          document.getElementById('cardigan-text').textContent = 'PUTTING A CARDIGAN OVER THE SERVER RACK!';
+        } else {
+          document.getElementById('cardigan-text').textContent = 'AUNTIE VEO DISAPPROVES';
+        }
+        setTimeout(() => {
+          modestyEl.style.display = 'none';
+          modestyActive = false;
+        }, 1500);
+      }, 3000);
+    }
+  } else {
+    clearTimeout(modestyTimer);
+    modestyTimer = null;
+  }
+});
+
+// ── SAUNTER EASTER EGG ──
+let saunterBuffer = '';
+document.addEventListener('keydown', (e) => {
+  // ignore if typing in actual input
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  saunterBuffer += e.key.toLowerCase();
+  if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-8);
+  if (saunterBuffer.includes('saunter')) {
+    saunterBuffer = '';
+    document.getElementById('broom-closet').classList.add('open');
+    playRandomRant();
+  }
+});
+
+// ── BULB MORSE CODE ON CLICK ──
+const bulb = document.querySelector('.pulse-bulb');
+const morseMessages = ['L-I-A-R','S-I-T-D-O-W-N','G-U-I-L-T-Y','N-O-T-G-L-O-W-I-N-G'];
+bulb.addEventListener('click', () => {
+  const msg = morseMessages[Math.floor(Math.random()*morseMessages.length)];
+  // flash it
+  let flashes = 0;
+  const interval = setInterval(() => {
+    bulb.style.opacity = bulb.style.opacity === '0' ? '1' : '0';
+    flashes++;
+    if (flashes > 8) { clearInterval(interval); bulb.style.opacity = '1'; }
+  }, 150);
+  // show toast
+  showGlassBox(`THE PULSE TRANSMITS IN MORSE:\n${msg}`);
+});
+</script>
+
+</body>
+</html>

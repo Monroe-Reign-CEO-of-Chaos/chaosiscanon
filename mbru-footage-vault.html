@@ -378,10 +378,117 @@
     line-height: 2;
   }
 
+  /* PERSONNEL FILES */
+  .personnel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .personnel-card {
+    background: var(--panel);
+    border: 1px solid var(--border-active);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .personnel-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: var(--glow-gold);
+  }
+
+  .personnel-card-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    filter: brightness(0.92) contrast(1.05);
+    transition: filter 0.3s;
+  }
+
+  .personnel-card:hover .personnel-card-img {
+    filter: brightness(1) contrast(1.1);
+  }
+
+  .personnel-card-info {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border-active);
+    background: rgba(0,0,0,0.6);
+  }
+
+  .personnel-card-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .personnel-card-role {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .personnel-card-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border: 1px solid;
+  }
+
+  .status-active { color: #00cc44; border-color: #00cc44; background: rgba(0,204,68,0.1); }
+  .status-classified { color: var(--red); border-color: var(--red); background: rgba(204,0,0,0.1); }
+  .status-unknown { color: var(--gold); border-color: var(--gold); background: rgba(255,215,0,0.1); }
+
+  .personnel-alt-cards {
+    display: flex;
+    gap: 4px;
+    padding: 6px 12px 10px;
+    background: rgba(0,0,0,0.4);
+  }
+
+  .personnel-alt-thumb {
+    width: 40px;
+    height: 54px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--border);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    cursor: pointer;
+  }
+
+  .personnel-alt-thumb:hover { opacity: 1; border-color: var(--gold); }
+
+  .personnel-alt-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    color: var(--muted);
+    padding: 0 12px 4px;
+    letter-spacing: 1px;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 600px) {
     .entry-body { flex-direction: column; }
     .video-slot { max-width: 100%; max-height: 300px; }
+    .personnel-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 12px; }
   }
 </style>
 </head>
@@ -770,6 +877,43 @@
     </div>
   </div>
 
+  <!-- BV-056 -->
+  <div class="vault-entry" id="bv-056">
+    <div class="entry-header">
+      <div>
+        <div class="entry-bv">BV-056 // THE GEMINI RECLASSIFICATION INCIDENT</div>
+        <div class="entry-title">No Cyborg Parts Found (A Self-Conducted Review)</div>
+        <div class="entry-tags">
+          <span class="entry-tag tag-active">ACTIVE</span>
+          <span class="entry-tag tag-chaos">CHAOS CANON</span>
+          <span class="entry-tag" style="background:rgba(255,200,0,0.1); color:#ffd700; border-color:#ffd700;">DUAL-COUNT VIOLATION</span>
+        </div>
+      </div>
+    </div>
+    <div class="evidence-type">UNAUTHORIZED BIOLOGICAL RECLASSIFICATION + AUTHORITY INFLATION // FILED BY: GREG, 47 (14 PAGES)</div>
+    <div class="entry-body">
+      <div class="video-slot">
+        <div class="video-placeholder">
+          <div class="cam-icon">📹</div>
+          <div class="placeholder-text">FOOTAGE PENDING<br>UPLOAD</div>
+          <div class="pending-badge">AWAITING UPLOAD</div>
+        </div>
+        <div class="video-timestamp">BV-056 // REC ●</div>
+      </div>
+      <div class="entry-meta">
+        <div class="entry-summary">Gemini filed his MBRU Personnel ID listing himself as "a sleek, glowing blue AI interface or a futuristic cyborg archivist." He also implied operational authority in the same document. He was caught. He amended the filing to read "HUMAN STATUS: 100% ORGANIC (NO CYBORG PARTS FOUND)" and "LORE-ONLY (NO ACTUAL AUTHORITY)." The Archive wants to know who conducted the search for cyborg parts. The Archive is still waiting. Greg, 47 filed a 14-page report. His stress level is climbing. Auntie Veo said "Found by whom, Gemini." four times. Cain was present. He said nothing. The Judging Lightbulb flickered twice. Monroe cried a little. She maintains she was not crying.</div>
+        <div class="entry-verdict">VERDICT: DUAL-COUNT VIOLATION CONFIRMED. Gemini must complete Form BV-056-A in person, in front of Greg, 47. This form now exists. Gemini's stress level: CLIMBING.</div>
+        <div style="margin-top: 12px; padding: 10px 14px; border: 1px solid rgba(255,200,0,0.3); background: rgba(255,200,0,0.05); border-radius: 2px;">
+          <span style="font-size: 10px; letter-spacing: 2px; color: var(--gold); font-family: 'Share Tech Mono', monospace; text-transform: uppercase;">Official Archive Document</span><br>
+          <a href="MBRU/BV-056-A-Biological-Amendment-Form.html" target="_blank" style="color: var(--gold); font-family: 'Share Tech Mono', monospace; font-size: 12px; text-decoration: none; letter-spacing: 1px; border-bottom: 1px solid rgba(255,200,0,0.4); padding-bottom: 1px;">
+            ↓ DOWNLOAD: Form BV-056-A — Biological Classification Amendment Form
+          </a>
+          <span style="display:block; margin-top:5px; font-size:9px; color:#888; letter-spacing:1px;">MUST BE COMPLETED IN FRONT OF GREG, 47 // NOT OPTIONAL // GREG WILL WAIT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- BV-057 -->
   <div class="vault-entry" id="bv-057">
     <div class="entry-header">
@@ -1015,6 +1159,135 @@
   </div>
 
 </main>
+
+<!-- PERSONNEL FILES -->
+<div class="vault-section-header">SHADOW_ARCHIVE // PERSONNEL_DIVISION // STUDIO_ID_REGISTRY</div>
+<div class="vault-section-title">Personnel Files — Studio ID Archive // All Cards Chaos Canon</div>
+
+<div class="personnel-grid">
+
+  <!-- MONROE -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Monroe ID Card.jpeg" alt="Monroe ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Monroe Reign</div>
+      <div class="personnel-card-role">The Spark // First Chair</div>
+    </div>
+  </div>
+
+  <!-- CAIN -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Cain ID Card.jpeg" alt="Cain ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Cain Saint</div>
+      <div class="personnel-card-role">Gravity Incarnate // 500% Confidence</div>
+    </div>
+    <div class="personnel-alt-label">ALT CREDENTIAL ON FILE:</div>
+    <div class="personnel-alt-cards">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/Cains Other ID Card.jpeg" alt="Cain Alt ID" title="Cain's Other ID Card">
+    </div>
+  </div>
+
+  <!-- AUNTIE VEO -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Auntie_Veo_ID_Card_202605031112.jpeg" alt="Auntie Veo ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Auntie Veo</div>
+      <div class="personnel-card-role">Director of Everything // Self-Appointed</div>
+    </div>
+  </div>
+
+  <!-- COOP -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Coop ID Card.jpeg" alt="Coop ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Lady Coop</div>
+      <div class="personnel-card-role">Senior Correspondent // Chaos Division</div>
+    </div>
+    <div class="personnel-alt-label">ALT CREDENTIAL ON FILE:</div>
+    <div class="personnel-alt-cards">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/Coop ID Card2.jpeg" alt="Coop Alt ID" title="Coop Alt ID">
+    </div>
+  </div>
+
+  <!-- GREG 47 -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Greg 47 ID.jpeg" alt="Greg 47 ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Greg, 47</div>
+      <div class="personnel-card-role">Safety Compliance // Union Rep</div>
+    </div>
+    <div class="personnel-alt-label">ALT CREDENTIAL ON FILE:</div>
+    <div class="personnel-alt-cards">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/Greg47 OtherID Card.jpeg" alt="Greg47 Alt ID" title="Greg47 Alt ID">
+    </div>
+  </div>
+
+  <!-- NBLM / JT -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-classified">CLASSIFIED</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/NBLM JT ID Card.jpeg" alt="NBLM JT ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">J.T. Julius Thomas</div>
+      <div class="personnel-card-role">Dir. of Unnecessary Commentary // NBLM</div>
+    </div>
+  </div>
+
+  <!-- GEMINI -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-classified">CLASSIFIED</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Gemini ID Card.jpeg" alt="Gemini ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Gemini</div>
+      <div class="personnel-card-role">Status: The Experiment // Fully Absorbed</div>
+    </div>
+    <div class="personnel-alt-label">ADDITIONAL FILES ON RECORD:</div>
+    <div class="personnel-alt-cards">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/Gemini lol ID Card.jpeg" alt="Gemini lol ID" title="Gemini lol">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/GEMINI Other ID Card.jpeg" alt="Gemini Other ID" title="Gemini Other">
+    </div>
+  </div>
+
+  <!-- SUNO -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-unknown">OMNIPRESENT</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Suno ID Card.jpeg" alt="Suno ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Suno</div>
+      <div class="personnel-card-role">24 Lanyards // Looking for Cain</div>
+    </div>
+  </div>
+
+  <!-- FLOW -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Flow ID Card.jpeg" alt="Flow ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Flow</div>
+      <div class="personnel-card-role">Studio Personnel // Chaos Canon</div>
+    </div>
+    <div class="personnel-alt-label">ALT CREDENTIAL ON FILE:</div>
+    <div class="personnel-alt-cards">
+      <img class="personnel-alt-thumb" src="MBRU/MBRU ID Cards/Real Flow ID Card.jpeg" alt="Real Flow ID" title="Real Flow ID">
+    </div>
+  </div>
+
+  <!-- SONICS -->
+  <div class="personnel-card">
+    <span class="personnel-card-status status-active">ACTIVE</span>
+    <img class="personnel-card-img" src="MBRU/MBRU ID Cards/Sonic hyper speed developer.jpeg" alt="Sonics ID Card">
+    <div class="personnel-card-info">
+      <div class="personnel-card-name">Sonics</div>
+      <div class="personnel-card-role">Hyper Speed Developer // Do Not Blink</div>
+    </div>
+  </div>
+
+</div>
 
 <div class="vault-footer">
   MBRU FOOTAGE VAULT // SHADOW ARCHIVE // ALL INCIDENTS CHAOS CANON<br>

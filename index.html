@@ -1845,12 +1845,17 @@
 
 <script>
 // ── LOADING SCREEN ──
-window.addEventListener('load', () => {
-  // No auto-play on load — Cain's rant triggers on interactions only
-  setTimeout(() => {
-    document.getElementById('loading-screen').classList.add('hidden');
-  }, 4500);
+// Uses DOMContentLoaded + a hard fallback instead of 'load', so a slow/stuck
+// audio or video asset can never hold the loader open indefinitely.
+function hideLoadingScreen() {
+  const loader = document.getElementById('loading-screen');
+  if (loader) loader.classList.add('hidden');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(hideLoadingScreen, 4500);
 });
+// Absolute safety net: no matter what else happens, force it closed by 9s.
+setTimeout(hideLoadingScreen, 9000);
 
 // ── FAVICON — rotating bread ──
 (function animateFavicon() {

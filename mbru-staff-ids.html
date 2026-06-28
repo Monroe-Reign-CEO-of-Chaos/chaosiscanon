@@ -114,11 +114,11 @@
   }
   .staff-photo {
     width: 100%;
-    height: 240px;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
+    object-fit: contain;
     display: block;
     border: 1px solid #ddd;
+    background: #f5f5f5;
   }
   .photo-placeholder {
     width: 100%;
@@ -381,7 +381,7 @@ function makeCard(data) {
         <div class="field-value">${data.rank}</div>
       </div>
       <div class="data-field">
-        <div class="field-label">ACCESS LEVEL:</div>
+        <div class="field-label">ACCESS STATUSLEVEL:</div>
         <div class="field-value">${data.access}</div>
         ${data.accessSub ? `<div class="field-sub">${data.accessSub}</div>` : ''}
       </div>

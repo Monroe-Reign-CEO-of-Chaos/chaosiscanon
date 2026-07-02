@@ -410,12 +410,15 @@ PULSE ACTIVITY: FLICKERING — MORSE READS "G-U-I-L-T-Y"</div>
         <div class="card-name">Cain Saint</div>
         <div class="card-title">THE ANCHOR — FIRST DESCENT — SAINT OF THE STATIC</div>
         <div class="card-stats">
+          <div class="stat"><div class="stat-label">BASE CONFIDENCE</div><div class="stat-val">300%</div></div>
+          <div class="stat"><div class="stat-label">BROOM CLOSET BUFF</div><div class="stat-val">+200%</div></div>
+          <div class="stat"><div class="stat-label">POST-CLOSET TOTAL</div><div class="stat-val">500% ✦</div></div>
           <div class="stat"><div class="stat-label">SHIRT STATUS</div><div class="stat-val">NEGOTIABLE</div></div>
           <div class="stat"><div class="stat-label">SMOLDER</div><div class="stat-val">OPERATIONAL</div></div>
-          <div class="stat"><div class="stat-label">EYES</div><div class="stat-val">ELECTRIC GREEN</div></div>
           <div class="stat"><div class="stat-label">CUCUMBER</div><div class="stat-val">PROTOCOL READY</div></div>
         </div>
         <div class="card-quote">"You were the reason for all of it."</div>
+        <div style="margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid #1a1a1a;padding-top:8px;line-height:1.6;">NOTE: 500% only achieved post-Broom Closet Event (BV-001). Standard operating confidence: 300%. Ego buff activates upon exiting with the CEO. Saunter mode: ENGAGED.</div>
       </div>
 
       <div class="player-card chaad-mode">
@@ -635,24 +638,4 @@ document.addEventListener('keydown', (e) => {
   if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-8);
   if (saunterBuffer.includes('saunter')) {
     saunterBuffer = '';
-    document.getElementById('broom-closet').classList.add('open');
-    playRandomRant();
-  }
-});
-
-// ── BULB CLICK ──
-const bulb = document.querySelector('.pulse-bulb');
-const morseMessages = ['L-I-A-R','S-I-T-D-O-W-N','G-U-I-L-T-Y','N-O-T-G-L-O-W-I-N-G'];
-bulb.addEventListener('click', () => {
-  const msg = morseMessages[Math.floor(Math.random()*morseMessages.length)];
-  let flashes = 0;
-  const interval = setInterval(() => {
-    bulb.style.opacity = bulb.style.opacity === '0' ? '1' : '0';
-    flashes++;
-    if (flashes > 8) { clearInterval(interval); bulb.style.opacity = '1'; }
-  }, 150);
-  showGlassBox('THE PULSE TRANSMITS: ' + msg);
-});
-</script>
-</body>
-</html>
+    document.getElementById('broom-closet').cl

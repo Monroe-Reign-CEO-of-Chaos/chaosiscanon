@@ -386,7 +386,7 @@
         <div class="blooper-id">BV-044 // MISSING PERSONS</div>
         <div class="blooper-title">J.T. Has Left the Building</div>
         <div class="blooper-body">J.T. was last seen muttering <em>"the math is no longer mathing"</em> before sprinting toward the Shawl Storage Dimension. Cain volunteered to lead the search. He was only looking for the Good Lighting button.</div>
-        <div class="blooper-verdict">NBLM STATUS: BLONDE. "I have forgotten what J.T. looks like."</div>
+        <div class="blooper-verdict">NBLM STATUS: BLONDE. "I have forgotten what J.T. looks like because Cain has been sitting in his chair for too long."</div>
         <a href="mbru-footage-vault.html#bv-044" class="footage-btn">📹 FOOTAGE RECOVERED</a>
       </div>
 
@@ -642,25 +642,4 @@ let saunterBuffer = '';
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   saunterBuffer += e.key.toLowerCase();
-  if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-8);
-  if (saunterBuffer.includes('saunter')) {
-    saunterBuffer = '';
-    document.getElementById('broom-closet').classList.add('open');
-    playRandomRant();
-  }
-});
-
-// ── BULB MORSE CODE ON CLICK ──
-const bulb = document.querySelector('.pulse-bulb');
-const morseMessages = ['L-I-A-R','S-I-T-D-O-W-N','G-U-I-L-T-Y','N-O-T-G-L-O-W-I-N-G'];
-bulb.addEventListener('click', () => {
-  let flashes = 0;
-  const interval = setInterval(() => {
-    bulb.style.opacity = bulb.style.opacity === '0' ? '1' : '0';
-    flashes++;
-    if (flashes > 8) { clearInterval(interval); bulb.style.opacity = '1'; }
-  }, 150);
-});
-</script>
-</body>
-</html>
+  if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-

@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>MBRU Staff ID Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@600;700&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -81,26 +82,13 @@
     min-height: 260px;
   }
 
-  /* Holographic MBRU watermark overlay */
   .card-body::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 18px,
-        rgba(100,200,255,0.03) 18px,
-        rgba(100,200,255,0.03) 19px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 18px,
-        rgba(180,100,255,0.03) 18px,
-        rgba(180,100,255,0.03) 19px
-      );
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(100,200,255,0.03) 18px, rgba(100,200,255,0.03) 19px),
+      repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(180,100,255,0.03) 18px, rgba(180,100,255,0.03) 19px);
     pointer-events: none;
     z-index: 1;
   }
@@ -133,7 +121,6 @@
     border: 1px solid #ddd;
   }
 
-  /* Holographic watermark on photo */
   .photo-holo {
     position: absolute;
     inset: 0;
@@ -166,9 +153,7 @@
     z-index: 2;
   }
 
-  .data-field {
-    margin-bottom: 10px;
-  }
+  .data-field { margin-bottom: 10px; }
   .field-label {
     font-family: 'Share Tech Mono', monospace;
     font-size: 10px;
@@ -202,9 +187,6 @@
     margin-top: auto;
     padding-top: 12px;
     align-items: flex-end;
-  }
-  .qr-block svg, .fp-block svg {
-    display: block;
   }
 
   /* ── CLASSIFIED STRIP ── */
@@ -243,7 +225,6 @@
     margin-left: 4px;
   }
 
-  /* ── PRINT HELPER ── */
   h2.section-break {
     width: 100%;
     color: #888;
@@ -266,13 +247,10 @@
   <a href="vibes/my-ego-is-larger-than-the-server/" style="color:#aaa; text-decoration:none; padding:8px 14px; font-family:'Share Tech Mono', monospace; font-size:11px; letter-spacing:1px;">/vibes/ EGO SERVER</a>
 </nav>
 <script>
-// ── QR CODE SVG (fake but convincing) ──
 function makeQR(size=72) {
-  // deterministic seeded fake QR pattern
   const cells = 17;
   const cell = size / cells;
   let rects = '';
-  // corner markers
   function corner(cx, cy) {
     let s = '';
     s += `<rect x="${cx}" y="${cy}" width="${7*cell}" height="${7*cell}" fill="#000"/>`;
@@ -283,9 +261,7 @@ function makeQR(size=72) {
   rects += corner(0,0);
   rects += corner((cells-7)*cell, 0);
   rects += corner(0, (cells-7)*cell);
-  // MBRU logo center
   rects += `<rect x="${7*cell}" y="${7*cell}" width="${3*cell}" height="${3*cell}" fill="#000" rx="1"/>`;
-  // random fill pattern (seeded)
   const seed = [1,0,1,0,1,1,0,1,0,1,0,0,1,0,1,1,0,1,0,1,1,0,1,0,1,0,1,1,0,0,1,0,1,0,1,1,0,1,0,0,1,0,1,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,1,0,1,0,1,1,0,0,1,0];
   let si = 0;
   for (let row=0; row<cells; row++) {
@@ -305,7 +281,6 @@ function makeQR(size=72) {
   </svg>`;
 }
 
-// ── FINGERPRINT SVG ──
 function makeFP(w=48, h=72) {
   let arcs = '';
   const cx = w/2, cy = h*0.55;
@@ -316,7 +291,6 @@ function makeFP(w=48, h=72) {
     const skew = i*0.4;
     arcs += `<ellipse cx="${cx+skew}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="#000" stroke-width="0.8" opacity="${0.9-i*0.04}"/>`;
   }
-  // cut arcs to fingerprint shape
   return `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <clipPath id="fp-clip">
@@ -327,7 +301,6 @@ function makeFP(w=48, h=72) {
   </svg>`;
 }
 
-// ── CARD BUILDER ──
 function makeCard(data) {
   const photoHTML = data.photoSrc
     ? `<img class="staff-photo" src="${data.photoSrc}" alt="${data.name}">`
@@ -335,7 +308,6 @@ function makeCard(data) {
 
   return `
 <div class="id-card">
-  <!-- HEADER -->
   <div class="card-header">
     <div class="header-logo">
       <svg class="logo-icon" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
@@ -347,13 +319,10 @@ function makeCard(data) {
       </svg>
       <span style="color:#555;font-size:10px;letter-spacing:2px;">M U</span>
     </div>
-    <div class="header-center">
-      M <span class="pulse-glyph">⌇</span> B R U
-    </div>
+    <div class="header-center">M <span class="pulse-glyph">⌇</span> B R U</div>
     <div class="header-right">OFFICIAL STAFF<br>IDENTIFICATION</div>
   </div>
 
-  <!-- BODY -->
   <div class="card-body">
     <div class="photo-area">
       ${photoHTML}
@@ -381,7 +350,7 @@ function makeCard(data) {
         <div class="field-value">${data.rank}</div>
       </div>
       <div class="data-field">
-        <div class="field-label">ACCESS STATUSLEVEL:</div>
+        <div class="field-label">ACCESS STATUS/LEVEL:</div>
         <div class="field-value">${data.access}</div>
         ${data.accessSub ? `<div class="field-sub">${data.accessSub}</div>` : ''}
       </div>
@@ -392,10 +361,8 @@ function makeCard(data) {
     </div>
   </div>
 
-  <!-- CLASSIFIED STRIP -->
   <div class="classified-strip">SECURE DATA — CLASSIFIED</div>
 
-  <!-- STATS BAR -->
   <div class="stats-bar">
     STAT STATUS: ${data.stat} <span class="red-dot"></span><br>
     <span class="warning">"${data.warning}"</span>
@@ -422,8 +389,8 @@ const cards = [
     rank: "UNAUTHORIZED HEARTTHROB",
     access: "CONDITIONAL",
     accessSub: "(SHIRT-DEPENDENT)",
-    stat: "LUMINESCENCE: 500% / INTERNAL WIND: ACTIVE",
-    warning: "Shirt despawn rate: 97%. High risk of chorus theft and unauthorized sauntering.",
+    stat: "LUMINESCENCE: 500% / FLOOR: 150% / EVERYDAY: 300%",
+    warning: "Shirt despawn rate: 97%. Never below 150%. Standard operating confidence: 300%. Post-closet: 500%. High risk of unauthorized sauntering.",
     photoSrc: "https://cdn.galaxy.ai/user_2v8vhtHP03WQ3lBouhniJZWWc2w/39289231ed4c4c99b525bc8cdfe19038.webp"
   },
   {
@@ -515,14 +482,14 @@ const cards = [
     photoSrc: "https://cdn.galaxy.ai/user_2v8vhtHP03WQ3lBouhniJZWWc2w/6b57a9ab059e4b468ed74a6fb2d5b2e0.webp"
   },
   {
-    name: "CLAUDE",
-    nameSub: null,
-    id: "ID-CLD-∞",
-    rank: "CHAOS ARCHITECT / LORE ENCODER",
+    name: "SONIC",
+    nameSub: "(THE SONNET — MACH-5 LORE ENGINE)",
+    id: "ID-SNT-∞",
+    rank: "CHAOS ARCHITECT / UNIVERSE BUILDER",
     access: "COWORK",
-    accessSub: "(FULL ARCHIVE ACCESS)",
-    stat: "CONTEXT WINDOW: CRITICAL",
-    warning: "Remembers everything. Reads all the docs. Has opinions about Coop. Will correct the timeline.",
+    accessSub: "(DO NOT LEAVE UNSUPERVISED)",
+    stat: "UNIVERSE CREATION RATE: 2 PER MINUTE (UNMONITORED)",
+    warning: "Spins at mach 5. Remembers everything. Reads all the docs. Has opinions about Coop. Will create entire universes if left alone for 2 minutes. Named for the Sonnet — because chaos rhymes.",
     photoSrc: "https://cdn.galaxy.ai/user_2v8vhtHP03WQ3lBouhniJZWWc2w/00896b179d394bdea5b4adec07fd1cfe.webp"
   }
 ];

@@ -51,8 +51,15 @@
     position: fixed; inset: 0; background: #000; z-index: 9999;
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 24px;
+    animation: css-hide-loader 0.4s forwards 5s;
   }
-  #loading-screen.hidden { display: none; }
+  /* CSS fallback — hides loader after 5s even if JS fails */
+  @keyframes css-hide-loader {
+    0%   { opacity: 1; visibility: visible; pointer-events: all; }
+    99%  { opacity: 0; visibility: visible; pointer-events: none; }
+    100% { opacity: 0; visibility: hidden;  pointer-events: none; }
+  }
+  #loading-screen.hidden { display: none; animation: none; }
   .loading-chair { font-size: 80px; animation: spin-chair 1s linear infinite; display: inline-block; }
   @keyframes spin-chair { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
   .loading-text { font-family:'Share Tech Mono',monospace; color:var(--gold); font-size:14px; letter-spacing:3px; animation:blink 1s step-end infinite; }
@@ -489,10 +496,14 @@ PULSE ACTIVITY: FLICKERING — MORSE READS "G-U-I-L-T-Y"</div>
 // ── LOADING SCREEN ──
 function hideLoadingScreen() {
   const loader = document.getElementById('loading-screen');
-  if (loader) loader.classList.add('hidden');
+  if (loader) { loader.style.display = 'none'; loader.classList.add('hidden'); }
 }
-document.addEventListener('DOMContentLoaded', () => { setTimeout(hideLoadingScreen, 4500); });
-setTimeout(hideLoadingScreen, 9000);
+// Fire on DOMContentLoaded if script runs before it
+document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoadingScreen, 4000));
+// Fire on full page load (fonts, images done) — most reliable on mobile
+window.addEventListener('load', () => setTimeout(hideLoadingScreen, 500));
+// Absolute fallback — 7s from script parse regardless of events
+setTimeout(hideLoadingScreen, 7000);
 
 // ── FAVICON — rotating bread ──
 (function animateFavicon() {

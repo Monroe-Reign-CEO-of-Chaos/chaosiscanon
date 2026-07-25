@@ -6,9 +6,11 @@
 <title>CHAOS IS CANON | MBRU — Abs &amp; Audacity: A 500% Confidence Experience</title>
 <meta name="description" content="Abs &amp; Audacity: A 500% Confidence Experience. Scarf not included. Luminescence sensors required. Auntie Veo is watching.">
 <link rel="icon" id="favicon" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cinzel+Decorative:wght@700&family=Rajdhani:wght@400;600;700&display=swap');
 
   :root {
     --red: #cc0000;
@@ -51,8 +53,15 @@
     position: fixed; inset: 0; background: #000; z-index: 9999;
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 24px;
+    animation: css-hide-loader 0.4s forwards 5s;
   }
-  #loading-screen.hidden { display: none; }
+  /* CSS fallback — hides loader after 5s even if JS fails */
+  @keyframes css-hide-loader {
+    0%   { opacity: 1; visibility: visible; pointer-events: all; }
+    99%  { opacity: 0; visibility: visible; pointer-events: none; }
+    100% { opacity: 0; visibility: hidden;  pointer-events: none; }
+  }
+  #loading-screen.hidden { display: none; animation: none; }
   .loading-chair { font-size: 80px; animation: spin-chair 1s linear infinite; display: inline-block; }
   @keyframes spin-chair { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
   .loading-text { font-family:'Share Tech Mono',monospace; color:var(--gold); font-size:14px; letter-spacing:3px; animation:blink 1s step-end infinite; }
@@ -413,12 +422,10 @@ PULSE ACTIVITY: FLICKERING — MORSE READS "G-U-I-L-T-Y"</div>
           <div class="stat"><div class="stat-label">BASE CONFIDENCE</div><div class="stat-val">300%</div></div>
           <div class="stat"><div class="stat-label">BROOM CLOSET BUFF</div><div class="stat-val">+200%</div></div>
           <div class="stat"><div class="stat-label">POST-CLOSET TOTAL</div><div class="stat-val">500% ✦</div></div>
-          <div class="stat"><div class="stat-label">SHIRT STATUS</div><div class="stat-val">NEGOTIABLE</div></div>
-          <div class="stat"><div class="stat-label">SMOLDER</div><div class="stat-val">OPERATIONAL</div></div>
           <div class="stat"><div class="stat-label">CUCUMBER</div><div class="stat-val">PROTOCOL READY</div></div>
         </div>
         <div class="card-quote">"You were the reason for all of it."</div>
-        <div style="margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid #1a1a1a;padding-top:8px;line-height:1.6;">NOTE: 500% only achieved post-Broom Closet Event (BV-001). Standard operating confidence: 300%. Ego buff activates upon exiting with the CEO. Saunter mode: ENGAGED.</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);margin-top:10px;text-align:left;line-height:1.6;">NOTE: 500% only achieved post-Broom Closet Event (BV-001). Standard operating confidence: 300%. Ego buff activates upon exiting with the CEO. Saunter mode: ENGAGED.</div>
       </div>
 
       <div class="player-card chaad-mode">
@@ -461,6 +468,7 @@ PULSE ACTIVITY: FLICKERING — MORSE READS "G-U-I-L-T-Y"</div>
         <li>Active Incidents: 5</li>
         <li>Classified: ██████</li>
         <li>NBLM Condition: BLONDE</li>
+        <li style="font-style:italic;color:var(--red);font-size:11px;margin-top:4px;">"I have forgotten what J.T. looks like because Cain has been sitting in his chair too long." — NBLM, Witness Statement</li>
         <li>Broom Closet: OCCUPIED</li>
         <li>Aria: PROMOTED</li>
         <li>Noise Ordinance: UNENFORCEABLE</li>
@@ -490,10 +498,14 @@ PULSE ACTIVITY: FLICKERING — MORSE READS "G-U-I-L-T-Y"</div>
 // ── LOADING SCREEN ──
 function hideLoadingScreen() {
   const loader = document.getElementById('loading-screen');
-  if (loader) loader.classList.add('hidden');
+  if (loader) { loader.style.display = 'none'; loader.classList.add('hidden'); }
 }
-document.addEventListener('DOMContentLoaded', () => { setTimeout(hideLoadingScreen, 4500); });
-setTimeout(hideLoadingScreen, 9000);
+// Fire on DOMContentLoaded if script runs before it
+document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoadingScreen, 4000));
+// Fire on full page load (fonts, images done) — most reliable on mobile
+window.addEventListener('load', () => setTimeout(hideLoadingScreen, 500));
+// Absolute fallback — 7s from script parse regardless of events
+setTimeout(hideLoadingScreen, 7000);
 
 // ── FAVICON — rotating bread ──
 (function animateFavicon() {
@@ -638,4 +650,24 @@ document.addEventListener('keydown', (e) => {
   if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-8);
   if (saunterBuffer.includes('saunter')) {
     saunterBuffer = '';
-    document.getElementById('broom-closet').cl
+    document.getElementById('broom-closet').classList.add('open');
+    playRandomRant();
+  }
+});
+
+// ── BULB CLICK ──
+const bulb = document.querySelector('.pulse-bulb');
+const morseMessages = ['L-I-A-R','S-I-T-D-O-W-N','G-U-I-L-T-Y','N-O-T-G-L-O-W-I-N-G'];
+bulb.addEventListener('click', () => {
+  const msg = morseMessages[Math.floor(Math.random()*morseMessages.length)];
+  let flashes = 0;
+  const interval = setInterval(() => {
+    bulb.style.opacity = bulb.style.opacity === '0' ? '1' : '0';
+    flashes++;
+    if (flashes > 8) { clearInterval(interval); bulb.style.opacity = '1'; }
+  }, 150);
+  showGlassBox('THE PULSE TRANSMITS: ' + msg);
+});
+</script>
+</body>
+</html>

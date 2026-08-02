@@ -214,6 +214,35 @@
   .footer-meta { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; line-height:2; border-top:1px solid var(--border); padding-top:20px; }
   .footer-status { color:var(--gold); font-style:italic; }
   .divider { height:1px; background:linear-gradient(90deg,transparent,var(--border),transparent); margin:8px 0; }
+
+  /* MBRU Chess Room Incident card */
+  .mbru-incident-section { max-width:780px; margin:3rem auto 0; padding:0 1.5rem; }
+  .mbru-incident-label { font-family:'Share Tech Mono',monospace; font-size:0.58rem; letter-spacing:0.28em; color:rgba(192,24,42,0.6); text-align:center; margin-bottom:1.4rem; }
+  .mbru-incident-card {
+    border:1px solid rgba(192,24,42,0.3);
+    background:linear-gradient(135deg,rgba(192,24,42,0.08) 0%,rgba(10,8,20,0.9) 60%);
+    padding:2rem 2.4rem 1.8rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .mbru-incident-card::before {
+    content:'';position:absolute;inset:0;
+    background-image:linear-gradient(rgba(192,24,42,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(192,24,42,0.04) 1px,transparent 1px);
+    background-size:30px 30px;pointer-events:none;
+  }
+  .mbru-incident-card::after { content:'♟';position:absolute;top:1rem;right:1.2rem;font-size:1.3rem;color:rgba(192,24,42,0.18);pointer-events:none; }
+  .mbru-incident-title { font-family:'Cinzel Decorative',serif;font-size:clamp(1rem,3vw,1.55rem);font-weight:700;color:#F5F0FF;text-shadow:0 0 22px rgba(192,24,42,0.35);margin-bottom:1.4rem;position:relative; }
+  .mbru-incident-meta { font-family:'Share Tech Mono',monospace;font-size:0.67rem;letter-spacing:0.09em;line-height:2.1;color:#8B82A8;margin-bottom:1.8rem;position:relative; }
+  .mbru-incident-meta .ml { color:rgba(192,24,42,0.85); }
+  .mbru-incident-meta .mv { color:#F5F0FF; }
+  .mbru-incident-btn {
+    font-family:'Share Tech Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;
+    color:#F5F0FF;background:rgba(192,24,42,0.14);border:1px solid rgba(192,24,42,0.5);
+    padding:0.7rem 1.5rem;cursor:pointer;text-decoration:none;display:inline-block;
+    transition:background 0.22s,border-color 0.22s,box-shadow 0.22s;position:relative;
+  }
+  .mbru-incident-btn:hover { background:rgba(192,24,42,0.28);border-color:rgba(192,24,42,0.9);box-shadow:0 0 16px rgba(192,24,42,0.32);color:#fff; }
+  .mbru-incident-sub { font-family:'Share Tech Mono',monospace;font-size:0.57rem;letter-spacing:0.09em;color:#4A4362;font-style:italic;margin-top:0.6rem;display:block; }
 </style>
 </head>
 <body>
@@ -468,6 +497,24 @@
 
     </div>
   </section>
+
+  <!-- MBRU Chess Room Incident -->
+  <div class="mbru-incident-section">
+    <p class="mbru-incident-label">// MBRU PRODUCTION ARCHIVE // CLASSIFIED FILING //</p>
+    <div class="mbru-incident-card">
+      <div class="mbru-incident-title">The Chess Room Incident</div>
+      <div class="mbru-incident-meta">
+        <div><span class="ml">CLASSIFICATION </span><span class="mv">Official Production Document</span></div>
+        <div><span class="ml">STATUS </span><span class="mv">Unusable footage retained in full</span></div>
+        <div><span class="ml">ENVIRONMENTAL DAMAGE </span><span class="mv">Cathedral fire, gravity reversal, architectural duplication</span></div>
+        <div><span class="ml">WARDROBE LOSSES </span><span class="mv">Ongoing</span></div>
+        <div><span class="ml">RESPONSIBLE PARTY </span><span class="mv">Under dispute</span></div>
+      </div>
+      <a href="chess-room-incident.html" class="mbru-incident-btn">VIEW THE "UNUSABLE" FOOTAGE</a>
+      <span class="mbru-incident-sub">J.T. has confirmed that every second is going in.</span>
+    </div>
+  </div>
+
 </main>
 
 <!-- FOOTER -->

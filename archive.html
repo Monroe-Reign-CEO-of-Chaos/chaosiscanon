@@ -698,4 +698,13 @@ let saunterBuffer = '';
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   saunterBuffer += e.key.toLowerCase();
-  if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-
+  if (saunterBuffer.length > 8) saunterBuffer = saunterBuffer.slice(-8);
+  if (saunterBuffer.endsWith('saunter')) {
+    document.getElementById('broom-closet').classList.add('open');
+    saunterBuffer = '';
+  }
+});
+
+</script>
+</body>
+</html>
